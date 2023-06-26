@@ -68,7 +68,7 @@ router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
   const { title, content } = req.body;
   const post = await Posts.create({
     imageUrl,
-    UsersId: userId,
+    UserId: userId,
     nickname: user.nickname,
     title,
     content,
@@ -78,12 +78,12 @@ router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
 });
 
 router.put('/:postId', loginMiddleware, async (req, res) => {
-  const { usersId } = res.locals.user;
+  const { userId } = res.locals.user;
   const { postId } = req.params;
   const { title, content } = req.body;
 
   const post = await Posts.findOne({
-    where: { [Op.and]: [{ postId }, { usersId }] },
+    where: { [Op.and]: [{ postId }, { userId }] },
   });
 
   if (!post) {
@@ -96,7 +96,7 @@ router.put('/:postId', loginMiddleware, async (req, res) => {
     { title, content },
     {
       where: {
-        [Op.and]: [{ postId }, { usersId }],
+        [Op.and]: [{ postId }, { userId }],
       },
     },
   );
@@ -108,7 +108,7 @@ router.delete('/:postId', loginMiddleware, async (req, res) => {
   const { userId } = res.locals.user;
   const { postId } = req.params;
   const post = await Posts.findOne({
-    where: { [Op.and]: [{ postId }, { usersId }] },
+    where: { [Op.and]: [{ postId }, { userId }] },
   });
 
   if (!post) {
