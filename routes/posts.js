@@ -8,7 +8,7 @@ const multer = require('multer');
 const AWS = require('aws-sdk');
 const loginMiddleware = require('../middleware/login-middleware');
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: '/' });
 
 AWS.config.update({
   accessKeyId: 'aws엑세스키 입력하세요 꼭 삭제하고 깃헙 올리세요~',
