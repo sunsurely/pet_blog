@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api', routes);
-app.use(express.static('public'));
+app.use(express.static('public/detail.html'));
 
 app.listen(port, () => {
   console.log(port, '포트로 서버가 대기 중입니다.');
