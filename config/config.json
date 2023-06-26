@@ -1,5 +1,4 @@
-{
-  "development": {
+
   "username": "root",
   "password": null,
   "database": "database_development",
@@ -21,3 +20,4 @@
   "dialect": "mysql"
   }
   }
+
