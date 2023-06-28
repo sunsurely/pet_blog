@@ -55,7 +55,7 @@ router.put("/posts/:postId/comments/:commentId", loginMiddleware, async (req, re
       },
   );
 
-  return res.status(200).json({ message: "게시글이 수정되었습니다." });
+  return res.status(200).json({ message: "댓글이 수정되었습니다." });
 });
 
 // 댓글 삭제 API
@@ -69,11 +69,11 @@ router.delete("/posts/:postId/comments/:commentId", loginMiddleware, async (req,
 
   if (!CommentId) {
       return res.status(404).json({
-          message: "게시글이 존재하지 않습니다.",
+          message: "댓글이 존재하지 않습니다.",
       })
   } else if (CommentId.UserId !== userId) {
       return res.status(403).json({
-          message: "게시글 삭제 권한이 있는 사용자가 아닙니다.",
+          message: "댓글 삭제 권한이 있는 사용자가 아닙니다.",
       });
   };
 
@@ -84,7 +84,7 @@ router.delete("/posts/:postId/comments/:commentId", loginMiddleware, async (req,
       }
   });
 
-  return res.status(200).json({ message: "게시글이 삭제되었습니다." });
+  return res.status(200).json({ message: "댓글이 삭제되었습니다." });
 });
 
 module.exports = router;
