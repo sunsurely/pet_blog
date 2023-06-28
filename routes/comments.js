@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const loginMiddleware = require('../middleware/login-middleware.js');
 const { Comments } = require("../models");
 
