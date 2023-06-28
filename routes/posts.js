@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { Posts } = require('../models');
-const { Users } = require('../models');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const { Op } = require('sequelize');
