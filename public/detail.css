@@ -1,0 +1,59 @@
+.mainBox {
+  margin-top: 5px;
+  border-style: solid none none none;
+}
+.postDetailBox {
+  margin-top: 30px;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 20px;
+  width: 80%;
+  min-width: 500px;
+  background-color: white;
+  height: auto;
+  min-height: 600px;
+  border-radius: 15px;
+}
+
+.postDetailBox h2 {
+  text-align: center;
+}
+
+.content {
+  margin-top: 20px;
+  background-color: rgb(233, 233, 240);
+  height: 82%;
+  min-height: 460px;
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.comment {
+  float: right;
+  display: flex;
+  margin-top: 15px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+#emptyHeartIcon {
+  margin-right: 5px;
+}
+
+.love {
+  float: right;
+  display: flex;
+  margin-top: 15px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+#commentIcon {
+  margin-right: 5px;
+}
+
+.comment:hover {
+  color: gray;
+}
+
+.love:hover {
+  color: gray;
+}
