@@ -2,8 +2,8 @@
   "development": {
     "username": "root",
     "password": "",
-    "database": "nodejs",
-    "host": "127.0.0.1",
+    "database": "pet_blog",
+    "host": "",
     "dialect": "mysql"
   },
   "test": {
