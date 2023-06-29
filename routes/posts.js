@@ -1,31 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { Posts } = require('../models');
-const multer = require('multer');
-const multerS3 = require('multer-s3');
 const { Op } = require('sequelize');
-const fs = require('fs');
-const AWS = require('aws-sdk');
 const loginMiddleware = require('../middleware/login-middleware');
-
-AWS.config.update({
-  accessKeyId: 'aws엑세스키 입력하세요 꼭 삭제하고 깃헙 올리세요~',
-  sceretAccessKey: '비밀키 깃허브 올릴 때 꼭 삭제해야 됩니다',
-});
-
-const upload = multer({
-  storage: multerS3({
-    // 저장 위치
-    s3: new AWS.S3(),
-    bucket: 'uploads',
-    acl: 'public-read',
-    contentType: multerS3.AUTO_CONTENT_TYPE,
-    key(req, file, cb) {
-      cb(null, `${Date.now()}_${path.basename(file.originalname)}`);
-    },
-  }),
-  limits: { fileSize: 5 * 1024 * 1024 },
-});
+const upload = require('../middleware/upload-middleware');
 
 router.get('/', async (req, res) => {
   const posts = await Posts.findAll({
