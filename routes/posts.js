@@ -8,7 +8,7 @@ const upload = require('../middleware/upload-middleware');
 
 router.get('/', async (req, res) => {
   const posts = await Posts.findAll({
-    attributes: ['postId', 'imageUrl', 'title', 'createdAt'],
+    attributes: ['postId', 'postImage', 'title', 'createdAt'],
     order: [['createdAt', 'DESC']],
   });
 
@@ -20,7 +20,7 @@ router.get('/:postId', async (req, res) => {
   try {
     const post = await Posts.findOne({
       attributes: [
-        'imageUrl',
+        'postImage',
         'postId',
         'title',
         'nickname',
