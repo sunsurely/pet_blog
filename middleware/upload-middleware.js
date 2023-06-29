@@ -26,6 +26,7 @@
 
 //아래 코드로 교체
 
+const multer = require('multer');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const multerS3 = require('multer-s3');
 const path = require('path');
