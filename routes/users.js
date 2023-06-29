@@ -106,7 +106,7 @@ router.patch(
           userContent,
         },
         {
-          where: { userId },
+          where: { UserId: userId },
         },
       );
 
