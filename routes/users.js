@@ -5,7 +5,6 @@ const { Profiles } = require('../models');
 const loginMiddleware = require('../middleware/login-middleware');
 const upload = require('../middleware/upload-middleware');
 
-
 const bcrypt = require('bcrypt');
 const saltRounds = 15;
 
@@ -50,7 +49,6 @@ router.post('/', async (req, res) => {
       .json({ errorMessage: '이미 존재하는 사용자입니다.' });
   }
 
-
   // 비밀번호 암호화 처리
   const encrypted = await bcrypt.hash(password, saltRounds);
 
@@ -59,12 +57,18 @@ router.post('/', async (req, res) => {
     password: encrypted, // 암호화 된 비밀번호를 저장
   });
 
+  const profile = await Profiles.create({
+    //회원 가입 시 프로필에 유저ID와 닉네임 저장
+    UserId: user.userId,
+    Nickname: user.nickname,
+  });
 
   return res.status(201).json({ message: '회원가입이 완료되었습니다.' });
 });
 
 router.get('/profile', loginMiddleware, async (req, res) => {
   const { userId } = res.locals.user;
+
   try {
     const profile = await Profiles.findOne({
       attribute: ['nickname', 'userComment', 'userImage'],
