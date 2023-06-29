@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "",
-    "database": "nodejs",
-    "host": "127.0.0.1",
+    "password": "yeonoh01",
+    "database": "pet_blog",
+    "host": "express-database.cdsrrfmgoslj.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
