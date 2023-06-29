@@ -66,6 +66,7 @@ router.post('/', async (req, res) => {
   return res.status(201).json({ message: '회원가입이 완료되었습니다.' });
 });
 
+//프로필 조회
 router.get('/profile', loginMiddleware, async (req, res) => {
   const { userId } = res.locals.user;
 
@@ -85,17 +86,18 @@ router.patch(
   loginMiddleware,
   upload.single('image'),
   async (req, res) => {
-    const { userId } = res.locals.user;
+    const User = res.locals.user;
     const { password } = req.params;
+    const hashedPassword = User.password;
+    const isPasswordMatch = await bcrypt.compare(password, User.password);
+
+    console.log(hashedPassword);
+    console.log(password);
     const userImage = req.file.location;
     console.log(userImage);
     const { userComment } = req.body; //userContent에서 userComment 로 변경
     try {
-      const user = await Users.findOne({
-        where: { userId },
-      });
-
-      if (password !== user.password) {
+      if (isPasswordMatch !== true) {
         return res
           .status(400)
           .json({ errMessage: '비밀번호가 일치하지 않습니다.' });
@@ -107,7 +109,7 @@ router.patch(
           userComment, //userContent에서 userComment 로 변경
         },
         {
-          where: { UserId: userId },
+          where: { UserId: User.userId },
         },
       );
 
