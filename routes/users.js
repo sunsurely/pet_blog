@@ -1,42 +1,40 @@
-const express = require("express");
-const { Users, UserInfos } = require("../models");
+const express = require('express');
 const router = express.Router();
+const { Users } = require('../models');
 
-
-router.post("/users", async (req, res) => {
-  const { email, password, name, age, gender, profileImage } = req.body;
-  const isExistUser = await Users.findOne({ where: { email } });
-
-  if (isExistUser) {
-    return res.status(400).json({ message: "이미 존재하는 이메일입니다." });
+router.post('/', async (req, res) => {
+  const { nickname, password, confirm } = req.body;
+  const pattern = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{3,}$/;
+  if (!nickname || !pattern.test(nickname)) {
+    return res
+      .status(412)
+      .json({ errorMessage: '닉네임의 형식이 일치하지 않습니다.' });
   }
 
-  const user = await Users.create({ email, password });
-  const userInfo = await UserInfos.create({
-    UserId: user.userId,
-    name,
-    age,
-    gender: gender.toUpperCase(),
-    profileImage
+  if (password.length < 4 || password.includes(nickname)) {
+    return res
+      .status(412)
+      .json({ errorMessage: '비밀번호의 형식이 일치하지 않습니다.' });
+  }
+  if (password !== confirm) {
+    return res
+      .status(412)
+      .json({ errorMessage: '패스워드가 패스워드 확인과 다릅니다.' });
+  }
+
+  const isExistUser = await Users.findOne({
+    where: { nickname },
   });
-
-  return res.status(201).json({ message: "회원가입이 완료되었습니다." });
-});
-
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await Users.findOne({ where: { email } });
-  if (!user) {
-    return res.status(401).json({ message: "존재하지 않는 이메일입니다." });
-  } else if (user.password !== password) {
-    return res.status(401).json({ message: "비밀번호가 일치하지 않습니다." });
+  if (isExistUser) {
+    return res
+      .status(412)
+      .json({ errorMessage: '이미 존재하는 이용자입니다.' });
   }
 
-  const token = jwt.sign({
-    userId: user.userId
-  }, "customized_secret_key");
-  res.cookie("authorization", `Bearer ${token}`);
-  return res.status(200).json({ message: "로그인 성공" });
+  const user = await Users.create({ nickname, password });
+
+  return res.status(201).json({ message: '회원가입이 완료되었습니다.' });
 });
 
 module.exports = router;
+//

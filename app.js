@@ -1,8 +1,6 @@
 const express = require('express');
 const routes = require('./routes');
-const commentRouter = requrie('./routes/comments.js');
 const cookieParser = require('cookie-parser');
-const usersRouter = require('./routes/users');
 
 const app = express();
 const port = 3000;
