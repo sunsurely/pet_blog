@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { Users } = require('../models');
 const { Posts } = require('../models');
 const { Op } = require('sequelize');
 const loginMiddleware = require('../middleware/login-middleware');
@@ -39,8 +40,11 @@ router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
   const imageUrl = req.file.location;
   const { userId } = res.locals.user;
   const { title, content } = req.body;
+  const user = await Users.findOne({
+    where: { userId },
+  });
   const post = await Posts.create({
-    imageUrl,
+    postImage: imageUrl, // 데이타베이스 postImage 항목 추가로  이름 변경
     UserId: userId,
     nickname: user.nickname,
     title,

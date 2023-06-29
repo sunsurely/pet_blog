@@ -87,8 +87,9 @@ router.patch(
   async (req, res) => {
     const { userId } = res.locals.user;
     const { password } = req.params;
-    const imageUrl = req.file.location;
-    const { userContent } = req.body;
+    const userImage = req.file.location;
+    console.log(userImage);
+    const { userComment } = req.body; //userContent에서 userComment 로 변경
     try {
       const user = await Users.findOne({
         where: { userId },
@@ -102,11 +103,11 @@ router.patch(
 
       const profile = await Profiles.update(
         {
-          imageUrl,
-          userContent,
+          userImage: userImage,
+          userComment, //userContent에서 userComment 로 변경
         },
         {
-          where: { userId },
+          where: { UserId: userId },
         },
       );
 
