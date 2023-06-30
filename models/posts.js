@@ -32,12 +32,20 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false, // NOT NULL
         type: DataTypes.INTEGER,
       },
+      postImage: {
+        allowNull: false, // NOT NULL
+        type: DataTypes.STRING, //게시물 이미지 저장위해 추가
+      },
       title: {
         allowNull: false, // NOT NULL
         type: DataTypes.STRING,
       },
       content: {
         allowNull: false, // NOT NULL
+        type: DataTypes.STRING,
+      },
+      nickname: {
+        allowNull: false,
         type: DataTypes.STRING,
       },
       createdAt: {

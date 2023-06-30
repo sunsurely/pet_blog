@@ -26,6 +26,10 @@ module.exports = {
         allowNull: false, // NOT NULL
         type: Sequelize.STRING,
       },
+      postImage: {
+        allowNull: false, // NOT NULL
+        type: Sequelize.STRING, //게시물 이미지 저장위해 추가
+      },
       content: {
         allowNull: false, // NOT NULL
         type: Sequelize.STRING,

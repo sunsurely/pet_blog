@@ -42,19 +42,19 @@
             </div>
         </div>
       </div>
-      <!-- 아래는 모달 -->
-      <div class="pannal">
+       <!-- 아래는 모달 -->
+    <div class="pannal">
     </div>
     <div class="loginModal">
       <i class="fi fi-rr-cross-small" onclick="closeModal()" id="modalCloseBtn"></i>
       <h3>로그인</h3>
           <div class="modalBox">
-            <form action="/login" method="post">
+            <form action="/api/login" method="post">
               <label for="fname">닉네임</label>
               <input type="text" name="nickname" class="nicknameText" placeholder="Your name..">
 
-              <label for="lname">패스워드</label>
-              <input type="text" name="password" class="passwordText" placeholder="Your last name..">
+              <label for="lname">비밀번호</label>
+              <input type="password" name="password" class="passwordText" placeholder="Your last name..">
             
               <input class="loginSubmit" type="submit" value="로그인">
             </form>
@@ -65,15 +65,21 @@
       <i class="fi fi-rr-cross-small" onclick="closeModal()" id="modalCloseBtn"></i>
       <h3>회원가입</h3>
           <div class="modalBox">
-            <form action="/signup" method="post">
+            <form action="/api/users" method="post">
               <label for="fname">닉네임</label>
               <input type="text" name="nickname" class="nicknameText" placeholder="Your name..">
 
-              <label for="lname">패스워드</label>
-              <input type="text" name="password" class="passwordText" placeholder="Your last name..">
+              <!-- <label for="fname">이메일</label>
+              <input type="email" name="nickname" class="nicknameText" placeholder="Your name.." id="inputEmail"> -->
+
+              <label for="lname">비밀번호</label>
+              <input type="password" name="password" class="passwordText" placeholder="Your last name..">
+
+              <label for="lname">비밀번호 확인</label>
+              <input type="password" name="confirm" class="passwordText" placeholder="Your last name..">
 
               <!-- <label for="lname">사진자리 나중에 추가</label>
-              <input type="text" name="password" class="passwordText" placeholder="Your last name.."> -->
+              <input type="image" name="password" class="passwordText" placeholder="Your last name.."> -->
             
               <input class="signUpSubmit" type="submit" value="회원가입">
             </form>
