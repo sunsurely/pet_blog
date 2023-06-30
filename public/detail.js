@@ -25,8 +25,8 @@ const getDetail = async (id) => {
             <i class="fi fi-rr-comment-alt" id="commentIcon"></i>
             <p>댓글</p>
          </div>
+         <button id="${post.i}">삭제버튼</button>
        </div>`;
-
   mainBox.innerHTML = temp;
 };
 
