@@ -38,21 +38,21 @@ const getDetail = async (id) => {
 //           <input type="submit" value="Delete"/>
 //         </form>
 // }
-// async function updatePost(id) {
-//   const result = await axios.get(`/api/posts/${id}`);
-//   const post = result.data;
-//   const mainBox = document.querySelector('.mainBox');
-//   mainBox.innerHTML = '';
-//   const temp = `
-//        <div class="postDetailBox">
-//           <input type="text" name="title" class="postTitle" placeholder="제목을 입력해주세요.">
-//           <textarea class="postTextArea" name="content" rows="45", cols="100"></textarea>
-//           <input type="file" name="image" class="addPostImage">
-//           <button onclick="getPut(${id})" >수정하기</button>
-//        </div>`;
+async function updatePost(id) {
+  const result = await axios.get(`/api/posts/${id}`);
+  const post = result.data;
+  const mainBox = document.querySelector('.mainBox');
+  mainBox.innerHTML = '';
+  const temp = `
+       <div class="postDetailBox">
+          <input type="text" name="title" class="postTitle" placeholder="제목을 입력해주세요.">
+          <textarea class="postTextArea" name="content" rows="45", cols="100"></textarea>
+          <input type="file" name="image" class="addPostImage">
+          <button onclick="getPut(${id})" >수정하기</button>
+       </div>`;
 
-//   mainBox.innerHTML = temp;
-// }
+  mainBox.innerHTML = temp;
+}
 
 function getDelete(callback) {
   $.ajax({
@@ -74,27 +74,27 @@ function getDelete(callback) {
   window.location.href = 'index.html';
 }
 
-// function getPut(title, content) {
-//   console.log(title);
-//   console.log(content);
-//   $.ajax({
-//     type: 'PUT',
-//     url: `/api/posts/${id}`,
-//     data: {
-//       title,
-//       content,
-//     },
-//     error: function (xhr, status, error) {
-//       if (status == 401) {
-//         alert('로그인이 필요합니다.');
-//       } else {
-//         localStorage.clear();
-//         alert('알 수 없는 문제가 발생했습니다. 관리자에게 문의하세요.');
-//       }
-//       window.location.href = 'index.html';
-//     },
-//   });
-//   // window.location.href = 'index.html';
-// }
+function getPut(title, content) {
+  console.log(title);
+  console.log(content);
+  $.ajax({
+    type: 'PUT',
+    url: `/api/posts/${id}`,
+    data: {
+      title,
+      content,
+    },
+    error: function (xhr, status, error) {
+      if (status == 401) {
+        alert('로그인이 필요합니다.');
+      } else {
+        localStorage.clear();
+        alert('알 수 없는 문제가 발생했습니다. 관리자에게 문의하세요.');
+      }
+      window.location.href = 'index.html';
+    },
+  });
+  // window.location.href = 'index.html';
+}
 
 getDetail(id);
