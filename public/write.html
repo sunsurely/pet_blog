@@ -25,7 +25,7 @@
         <h1 onclick="location.reload()">Pet blog</h1>
       </header>
       <div class="body">
-        <form action="/api/posts" method="post">
+        <form action="/api/posts" method="post" enctype="multipart/form-data">
           <input type="text" name="title" class="postTitle" placeholder="제목을 입력해주세요.">
           <textarea class="postTextArea" name="content" rows="45", cols="100"></textarea>
           <input type="file" name="image" class="addPostImage">
