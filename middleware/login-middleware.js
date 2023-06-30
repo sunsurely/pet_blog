@@ -14,10 +14,10 @@ const loginMiddleware = async (req, res, next) => {
   }
 
   try {
-    const { usersId } = jwt.verify(authToken, 'costomized-secret-key');
+    const { userId } = jwt.verify(authToken, 'costomized-secret-key');
 
     const user = await Users.findOne({
-      where: usersId,
+      where: userId,
     });
     res.locals.user = user;
     next();

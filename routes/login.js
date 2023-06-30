@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
   }
 
   // jwt 생성
-  const token = jwt.sign({ usersId: user.usersId }, 'costomized-secret-key', {
+  const token = jwt.sign({ userId: user.userId }, 'costomized-secret-key', {
     expiresIn: '1h',
   }); // 1시간후 토큰 자동 만료
   res.cookie('authorization', `Bearer ${token}`);
