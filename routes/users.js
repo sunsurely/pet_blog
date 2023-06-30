@@ -22,6 +22,7 @@ router.get('/me', loginMiddleware, async (req, res) => {
 // 회원가입 API
 router.post('/', async (req, res) => {
   const { nickname, password, confirm } = req.body;
+  console.log(password);
   const pattern = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{3,}$/;
   if (!nickname || !pattern.test(nickname)) {
     return res
@@ -81,6 +82,7 @@ router.get('/profile', loginMiddleware, async (req, res) => {
   }
 });
 
+// 프로필 수정 API
 router.patch(
   '/:password/profile',
   loginMiddleware,
@@ -88,14 +90,10 @@ router.patch(
   async (req, res) => {
     const User = res.locals.user;
     const { password } = req.params;
-    const hashedPassword = User.password;
+    const userImage = req.file.location;
+    const { userComment } = req.body; //userContent에서 userComment 로 변경
     const isPasswordMatch = await bcrypt.compare(password, User.password);
 
-    console.log(hashedPassword);
-    console.log(password);
-    const userImage = req.file.location;
-    console.log(userImage);
-    const { userComment } = req.body; //userContent에서 userComment 로 변경
     try {
       if (isPasswordMatch !== true) {
         return res

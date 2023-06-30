@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function () {
+  // initMain(); //첫 메인페이지 접속시 조회화면
+});
+
 function openLoginModal() {
   let loginModal = $('.loginModal');
   let pannal = $('.pannal');
@@ -18,3 +22,19 @@ function opensignUpModal() {
   pannal.show();
   signUpModal.show();
 }
+
+// // 최초 접속시 조회화면
+// const initMain = async () => {
+//   const cardBody = document.querySelector('.postBox');
+//   cardBody.innerHTML = '';
+//   const { data } = await axios.get('/api/posts');
+//   console.log(data);
+
+//   data.forEach((item) => {
+//     const temp = `
+//       <div class="postBox">
+//       <p
+//       </div>
+//     `;
+//   });
+// };
