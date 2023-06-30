@@ -1,0 +1,41 @@
+.mainbox {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 2fr)); */
+  column-gap: 10px;
+}
+
+.profileImage {
+  min-width: 400px;
+  height: 450px;
+  border-radius: 100px;
+}
+
+.myImage {
+  border-radius: 100px;
+  width: 80%;
+  max-width: 300px;
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.setImageBtn {
+  float: right;
+  margin-right: 3%;
+  z-index: 4;
+  display: none;
+}
+
+.profileImage h3 {
+  margin-top: 3%;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+.myPosts {
+  min-width: 800px;
+  background-color: red;
+  height: 450px;
+}

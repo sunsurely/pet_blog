@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+    rel="stylesheet"
+    href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <script src="./profile.js" defer></script>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="profiles.css" />
+    <title>Pet blog</title>
+  </head>
+
+  <body>
+    <div class="topBar">
+      <div class="topIcon">
+        <i class="fi fi-rr-home" id="homeBtn" onclick="location.reload()"></i>
+      </div>
+      <div class="signBox">
+        <!-- <button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
+        <button class="loginBtn" onclick="openLoginModal()"></i>로그인</button> -->
+        <button class="profileBtn" onclick=""></i>프로필</button>
+      </div>
+      <header>
+        <h1 onclick="location.reload()">Pet blog</h1>
+      </header>
+    </div>
+
+    <div class="mainbox">
+        <div class="profileImage">
+            <div>
+                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEwMjdfMTQg%2FMDAxNjY2ODQwNDIxMDY2.tQqXDjbzCfx-ZQPVEM3vPdVfFS6vn9NnHSLt09iZwvQg.ZXKnoL6w7rPx63TVDqbFfU4yIrFDrxHthx88zm5DPKog.JPEG.aramnurimaru%2F20221024%25A3%25DF102003.jpg&type=a340"
+                        class="myImage" alt="...">
+                        <h3>닉네임</h3>
+                <form method="post" action=""class="setImageBtn">
+                    <input type="hidden" name="_method" value="put" />
+                    <input type="file" name="image">
+                    <button >사진 설정</button>
+                    
+                </form>
+                <button class="modBtn" >수정</button>
+            </div>
+        </div>
+        <div class="myPosts">
+            내가 쓴 게시글
+        </div>
+    </div>
+  </body>
+
+</html>
