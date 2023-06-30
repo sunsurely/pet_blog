@@ -25,9 +25,11 @@
         <h1 onclick="location.reload()">Pet blog</h1>
       </header>
       <div class="body">
-        <form action="/api/users" method="post">
-          <input type="text" class="postTitle" placeholder="제목을 입력해주세요.">
-          <textarea class="postTextArea" rows="45", cols="100"></textarea>
+        <form action="/api/posts" method="post">
+          <input type="text" name="title" class="postTitle" placeholder="제목을 입력해주세요.">
+          <textarea class="postTextArea" name="content" rows="45", cols="100"></textarea>
+          <input type="file" name="image" class="addPostImage">
+          <button class="postsSubmit" type="submit" >글쓰기</button>
         </form>
       </div>
        <!-- 아래는 모달 -->

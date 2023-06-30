@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       postImage: {
-        allowNull: false, // NOT NULL
+        allowNull: true, // NOT NULL
         type: DataTypes.STRING, //게시물 이미지 저장위해 추가
       },
       title: {
