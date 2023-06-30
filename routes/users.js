@@ -81,7 +81,6 @@ router.get('/profile', loginMiddleware, async (req, res) => {
   }
 });
 
-// 프로필 수정 API
 router.patch(
   '/:password/profile',
   loginMiddleware,
@@ -89,10 +88,14 @@ router.patch(
   async (req, res) => {
     const User = res.locals.user;
     const { password } = req.params;
-    const userImage = req.file.location;
-    const { userComment } = req.body; //userContent에서 userComment 로 변경
+    const hashedPassword = User.password;
     const isPasswordMatch = await bcrypt.compare(password, User.password);
 
+    console.log(hashedPassword);
+    console.log(password);
+    const userImage = req.file.location;
+    console.log(userImage);
+    const { userComment } = req.body; //userContent에서 userComment 로 변경
     try {
       if (isPasswordMatch !== true) {
         return res
