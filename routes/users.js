@@ -90,7 +90,8 @@ router.patch(
   async (req, res) => {
     const User = res.locals.user;
     const { password } = req.body;
-    const userImage = req.file.location;
+    const file = req.file;
+    let profile;
     const { userComment } = req.body; //userContent에서 userComment 로 변경
     const isPasswordMatch = await bcrypt.compare(password, User.password);
 
@@ -100,16 +101,43 @@ router.patch(
           .status(400)
           .json({ errMessage: '비밀번호가 일치하지 않습니다.' });
       }
-
-      const profile = await Profiles.update(
-        {
-          userImage: userImage,
-          userComment, //userContent에서 userComment 로 변경
-        },
-        {
+      if (file && userComment) {
+        //프로필 페이지에서  이미지 , 커멘트 모두 보내는 경우
+        profile = await Profiles.update(
+          {
+            userImage: file.location,
+            userComment, //userContent에서 userComment 로 변경
+          },
+          {
+            where: { UserId: User.userId },
+          },
+        );
+      } else if (userComment) {
+        //커멘트만 보낸 경우
+        profile = await Profiles.update(
+          {
+            userComment, //userContent에서 userComment 로 변경
+          },
+          {
+            where: { UserId: User.userId },
+          },
+        );
+      } else if (file) {
+        //이미지만 보낸 경우
+        profile = await Profiles.update(
+          {
+            userComment, //userContent에서 userComment 로 변경
+          },
+          {
+            where: { UserId: User.userId },
+          },
+        );
+      } else {
+        // 변경 사항 없을 시
+        profile = await Profiles.findOne({
           where: { UserId: User.userId },
-        },
-      );
+        });
+      }
 
       res.status(201).json({ data: profile });
     } catch (err) {
