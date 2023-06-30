@@ -38,7 +38,6 @@ router.get('/:postId', async (req, res) => {
 
 router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
   const imageUrl = req.file;
-  console.log(imageUrl);
   const { userId } = res.locals.user;
   const { title, content } = req.body;
   const user = await Users.findOne({
