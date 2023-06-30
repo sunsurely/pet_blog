@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function () {
+  initMain(); //첫 메인페이지 접속시 조회화면
+});
+
 function openLoginModal() {
   let loginModal = $('.loginModal');
   let pannal = $('.pannal');
@@ -18,3 +22,7 @@ function opensignUpModal() {
   pannal.show();
   signUpModal.show();
 }
+
+const inMain = async () => {
+  const { posts } = await axios.get('/api');
+};

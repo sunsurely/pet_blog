@@ -6,6 +6,7 @@ const { Op } = require('sequelize');
 const loginMiddleware = require('../middleware/login-middleware');
 const upload = require('../middleware/upload-middleware');
 
+// 게시글 조회 API
 router.get('/', async (req, res) => {
   const posts = await Posts.findAll({
     attributes: ['postId', 'postImage', 'title', 'createdAt'],
@@ -15,6 +16,7 @@ router.get('/', async (req, res) => {
   res.status(200).json({ data: posts });
 });
 
+// 게시글 상세 조회 API
 router.get('/:postId', async (req, res) => {
   const { postId } = req.params;
   try {
@@ -36,25 +38,34 @@ router.get('/:postId', async (req, res) => {
   }
 });
 
-router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
-  const imageUrl = req.file;
-  console.log(imageUrl);
-  const { userId } = res.locals.user;
-  const { title, content } = req.body;
-  const user = await Users.findOne({
-    where: { userId },
-  });
-  const post = await Posts.create({
-    postImage: imageUrl, // 데이타베이스 postImage 항목 추가로  이름 변경
-    UserId: userId,
-    nickname: user.nickname,
-    title,
-    content,
-  });
 
-  return res.status(201).json({ data: post });
-});
 
+router.post(
+  '/posts',
+  loginMiddleware,
+  upload.single('image'),
+  async (req, res) => {
+    const imageUrl = req.file.location;
+    const { userId } = res.locals.user;
+    const { title, content } = req.body;
+    const user = await Users.findOne({
+      where: { userId },
+    });
+    const post = await Posts.create({
+      postImage: imageUrl, // 데이타베이스 postImage 항목 추가로  이름 변경
+      UserId: userId,
+      nickname: user.nickname,
+      title,
+      content,
+    });
+
+
+    return res.status(201).json({ data: post });
+  },
+);
+
+
+// 게시글 수정 API
 router.put('/:postId', loginMiddleware, async (req, res) => {
   const { userId } = res.locals.user;
   const { postId } = req.params;
@@ -82,6 +93,7 @@ router.put('/:postId', loginMiddleware, async (req, res) => {
   res.status(201).json({ message: '게시물을 수정했습니다.' });
 });
 
+// 게시글 삭제 API
 router.delete('/:postId', loginMiddleware, async (req, res) => {
   const { userId } = res.locals.user;
   const { postId } = req.params;
