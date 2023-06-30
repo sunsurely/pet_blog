@@ -3,18 +3,20 @@
   border-style: solid none none none;
 }
 .postDetailBox {
-  margin-top: 30px;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin: 5% auto;
   padding: 20px;
-  width: 80%;
+  width: 60%;
   min-width: 500px;
   background-color: white;
   height: auto;
   min-height: 600px;
   border-radius: 15px;
 }
-
+.postDetailBox img {
+  width: 50%;
+  height: 10%;
+  margin-left: 25%;
+}
 .postDetailBox h2 {
   text-align: center;
 }

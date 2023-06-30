@@ -25,16 +25,31 @@ function opensignUpModal() {
 
 // 최초 접속시 조회화면
 const initMain = async () => {
-  const cardBody = document.querySelector('.postBox');
+  const cardBody = document.querySelector('.body');
   cardBody.innerHTML = '';
   const { data } = await axios.get('/api/posts');
-  console.log(data);
+  const results = data.data;
 
-  data.forEach((item) => {
+  results.forEach((item) => {
     const temp = `
-      <div class="postBox">
-      <p
+      <div id="${item.postId}"  class="postBox">
+      <img class="post-image" src="${item.postImage}"/>
+      <p>${item.title}</p>
+      <p>${item.content}</p>
+      <p>${item.createdAt}</p>
       </div>
     `;
+    cardBody.innerHTML += temp;
+  });
+
+  const postBox = document.querySelectorAll('.postBox');
+  postBox.forEach((item) => {
+    item.addEventListener('click', () => {
+      const id = item.getAttribute('id');
+      window.location.href = `/detail.html?id=${id}`;
+      console.log(id);
+    });
   });
 };
+
+//카드 상세조회

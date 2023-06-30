@@ -9,7 +9,7 @@ const upload = require('../middleware/upload-middleware');
 // 게시글 조회 API
 router.get('/', async (req, res) => {
   const posts = await Posts.findAll({
-    attributes: ['postId', 'postImage', 'title', 'createdAt'],
+    attributes: ['postId', 'postImage', 'title', 'content', 'createdAt'],
     order: [['createdAt', 'DESC']],
   });
 
@@ -32,7 +32,8 @@ router.get('/:postId', async (req, res) => {
       ],
       where: { postId },
     });
-    return res.status(200).json({ data: post });
+
+    return res.status(200).json(post);
   } catch (err) {
     console.log(err);
   }
