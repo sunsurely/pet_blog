@@ -15,6 +15,15 @@ header {
   background-position: center;
   background-size: cover;
 }
+
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background-color: rgb(203, 203, 209);
+
+  border-style: none none solid none;
+}
 header h1 {
   cursor: pointer;
 }
@@ -41,19 +50,6 @@ header h1 {
   cursor: pointer;
 }
 
-.body {
-  margin-top: 5px;
-  border-style: solid none none none;
-}
-
-.postBox {
-  color: white;
-  margin-top: 20px;
-  margin-left: 100px;
-  margin-right: 100px;
-
-  color: black;
-}
 .post-image {
   width: 100%;
   height: 200px;
@@ -66,47 +62,9 @@ header h1 {
 body {
   background-color: rgb(233, 233, 240);
 }
-header {
-  color: black;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px 0;
-
-  background-position: center;
-  background-size: cover;
-}
-header h1 {
-  text-align: center;
-  cursor: pointer;
-}
-
-.topIcon {
-  margin-top: 18px;
-  float: left;
-}
-
-#homeBtn {
-  margin-left: 10px;
-  font-size: 28px;
-  cursor: pointer;
-}
-
-.signBox {
-  margin-top: 20px;
-  float: right;
-}
-.signUpBtn {
-  cursor: pointer;
-}
-.loginBtn {
-  cursor: pointer;
-}
 
 .body {
   margin-top: 5px;
-  border-style: solid none none none;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
