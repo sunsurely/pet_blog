@@ -38,28 +38,23 @@ router.get('/:postId', async (req, res) => {
   }
 });
 
-router.post(
-  '/posts',
-  loginMiddleware,
-  upload.single('image'),
-  async (req, res) => {
-    const imageUrl = req.file.location;
-    const { userId } = res.locals.user;
-    const { title, content } = req.body;
-    const user = await Users.findOne({
-      where: { userId },
-    });
-    const post = await Posts.create({
-      postImage: imageUrl, // 데이타베이스 postImage 항목 추가로  이름 변경
-      UserId: userId,
-      nickname: user.nickname,
-      title,
-      content,
-    });
+router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
+  const imageUrl = req.file;
+  const { userId } = res.locals.user;
+  const { title, content } = req.body;
+  const user = await Users.findOne({
+    where: { userId },
+  });
+  const post = await Posts.create({
+    postImage: imageUrl, // 데이타베이스 postImage 항목 추가로  이름 변경
+    UserId: userId,
+    nickname: user.nickname,
+    title,
+    content,
+  });
 
-    return res.status(201).json({ data: post });
-  },
-);
+  return res.status(201).json({ data: post });
+});
 
 // 게시글 수정 API
 router.put('/:postId', loginMiddleware, async (req, res) => {
