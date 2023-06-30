@@ -59,32 +59,39 @@ router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
 });
 
 // 게시글 수정 API
-router.put('/:postId', loginMiddleware, async (req, res) => {
-  const { userId } = res.locals.user;
-  const { postId } = req.params;
-  const { title, content } = req.body;
+router.put(
+  '/:postId',
+  loginMiddleware,
+  upload.single('image'),
+  async (req, res) => {
+    const postImage = req.file.location;
+    const { userId } = res.locals.user;
+    const { postId } = req.params;
+    const { title, content } = req.body;
+    console.log(req.body);
 
-  const post = await Posts.findOne({
-    where: { [Op.and]: [{ postId }, { userId }] },
-  });
+    const post = await Posts.findOne({
+      where: { [Op.and]: [{ postId }, { userId }] },
+    });
 
-  if (!post) {
-    return res
-      .status(400)
-      .json({ errorMessage: '게시물을 수정할 수 없습니다.' });
-  }
+    if (!post) {
+      return res
+        .status(400)
+        .json({ errorMessage: '게시물을 수정할 수 없습니다.' });
+    }
 
-  await Posts.update(
-    { title, content },
-    {
-      where: {
-        [Op.and]: [{ postId }, { userId }],
+    await Posts.update(
+      { postImage, title, content },
+      {
+        where: {
+          [Op.and]: [{ postId }, { userId }],
+        },
       },
-    },
-  );
+    );
 
-  res.status(201).json({ message: '게시물을 수정했습니다.' });
-});
+    res.status(201).json({ message: '게시물을 수정했습니다.' });
+  },
+);
 
 // 게시글 삭제 API
 router.delete('/:postId', loginMiddleware, async (req, res) => {
@@ -93,7 +100,6 @@ router.delete('/:postId', loginMiddleware, async (req, res) => {
   const post = await Posts.findOne({
     where: { [Op.and]: [{ postId }, { userId }] },
   });
-
   if (!post) {
     return res.status(400).json({
       sucess: false,
