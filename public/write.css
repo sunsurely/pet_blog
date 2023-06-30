@@ -1,0 +1,19 @@
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.postTitle {
+  margin-top: 10px;
+  width: 600px;
+  height: 30px;
+  margin-left: 100px;
+}
+
+.postTextArea {
+  width: 800px;
+  margin-top: 10px;
+  margin-left: 100px;
+  padding: 20px;
+  resize: none;
+}

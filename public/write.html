@@ -10,54 +10,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="modal.css" />
+    <link rel="stylesheet" href="write.css" />
     <title>Pet blog</title>
   </head>
-
   <body>
     <div class="topIcon">
-      <i class="fi fi-rr-home" id="homeBtn" onclick="location.reload()"></i>
-    </div>
-    <div class="signBox">
-      <button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
-      <button class="loginBtn" onclick="openLoginModal()"></i>로그인</button>
-    </div>
-    <header>
-      <h1 onclick="location.reload()">Pet blog</h1>
-    </header>
-
-    <div class="body">
-      
-      <div class="postBox" onclick="location.href='detail.html'">
-        <p>제목입니다.</p>
-        <p>내용입니다.가나다라마바사</p>
+        <i class="fi fi-rr-home" id="homeBtn" onclick="location.reload()"></i>
       </div>
-      <div class="postBox" onclick="location.href='detail.html'">
-        <p>제목입니다.</p>
-        <p>내용입니다.가나다라마바사</p>
+      <div class="signBox">
+        <button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
+        <button class="loginBtn" onclick="openLoginModal()"></i>로그인</button>
       </div>
-      <div class="postBox" onclick="location.href='detail.html'">
-        <p>제목입니다.</p>
-        <p>내용입니다.가나다라마바사</p>
+      <header>
+        <h1 onclick="location.reload()">Pet blog</h1>
+      </header>
+      <div class="body">
+        <form action="/api/users" method="post">
+          <input type="text" class="postTitle" placeholder="제목을 입력해주세요.">
+          <textarea class="postTextArea" rows="45", cols="100"></textarea>
+        </form>
       </div>
-      <div class="postBox" onclick="location.href='detail.html'">
-        <p>제목입니다.</p>
-        <p>내용입니다.가나다라마바사</p>
-      </div>
-      <div class="postBox" onclick="location.href='detail.html'">
-        <p>제목입니다.</p>
-        <p>내용입니다.가나다라마바사</p>
-      </div>
-      <div class="postBox" onclick="location.href='detail.html'">
-        <p>제목입니다.</p>
-        <p>내용입니다.가나다라마바사</p>
-      </div>
-      <div class="postBox" onclick="location.href='detail.html'">
-        <p>제목입니다.</p>
-        <p>내용입니다.가나다라마바사</p>
-      </div>
-      
-    </div>
-    <!-- 아래는 모달 -->
+       <!-- 아래는 모달 -->
     <div class="pannal">
     </div>
     <div class="loginModal">

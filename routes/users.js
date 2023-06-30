@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
     password: encrypted, // 암호화 된 비밀번호를 저장
   });
 
-  const profile = await Profiles.create({
+  await Profiles.create({
     //회원 가입 시 프로필에 유저ID와 닉네임 저장
     UserId: user.userId,
     Nickname: user.nickname,
