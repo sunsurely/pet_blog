@@ -81,6 +81,7 @@ router.get('/profile', loginMiddleware, async (req, res) => {
   }
 });
 
+// 프로필 수정 API
 router.patch(
   '/:password/profile',
   loginMiddleware,
