@@ -39,6 +39,7 @@ router.get('/:postId', async (req, res) => {
 });
 
 
+
 router.post(
   '/posts',
   loginMiddleware,
@@ -62,6 +63,7 @@ router.post(
     return res.status(201).json({ data: post });
   },
 );
+
 
 // 게시글 수정 API
 router.put('/:postId', loginMiddleware, async (req, res) => {
