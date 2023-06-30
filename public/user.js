@@ -22,11 +22,21 @@ function opensignUpModal() {
   pannal.show();
   signUpModal.show();
 }
+function logout() {
+  axios
+    .post(`/api/login/logout`)
+    .then((response) => {
+      console.log('로그아웃 성공');
+    })
+    .catch((error) => {
+      console.error('로그아웃 실패: ' + error);
+    });
+}
 
 // 최초 접속시 조회화면
 const initMain = async () => {
   const cardBody = document.querySelector('.body');
-  cardBody.innerHTML = '';
+  cardBody.innerHTML = ``;
   const { data } = await axios.get('/api/posts');
   const results = data.data;
 
@@ -51,5 +61,3 @@ const initMain = async () => {
     });
   });
 };
-
-//카드 상세조회
