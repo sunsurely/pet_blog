@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  initMain(); //첫 메인페이지 접속시 조회화면
   logincheck();
 });
 
@@ -34,35 +33,6 @@ function logout() {
     });
 }
 
-// 최초 접속시 조회화면
-const initMain = async () => {
-  const cardBody = document.querySelector('.body');
-  cardBody.innerHTML = ``;
-  const { data } = await axios.get('/api/posts');
-  const results = data.data;
-
-  results.forEach((item) => {
-    const temp = `
-      <div id="${item.postId}"  class="postBox">
-      <img class="post-image" src="${item.postImage}"/>
-      <p>${item.title}</p>
-      <p>${item.content}</p>
-      <p>${item.createdAt}</p>
-      </div>
-    `;
-    cardBody.innerHTML += temp;
-  });
-
-  const postBox = document.querySelectorAll('.postBox');
-  postBox.forEach((item) => {
-    item.addEventListener('click', () => {
-      const id = item.getAttribute('id');
-      window.location.href = `/detail.html?id=${id}`;
-      console.log(id);
-    });
-  });
-};
-
 //로그인 체크
 
 function logincheck() {
@@ -74,7 +44,9 @@ function logincheck() {
     temp = `
     <button class="logoutBtn" onclick="location.href='write.html'"></i>글쓰기</button>
             <button class="logoutBtn" onclick="location.href='profiles.html'"></i>내 프로필</button>
-            <button class="logoutBtn" onclick="logout()"></i>로그아웃</button>
+            <form action="/api/login/logout" method="post">
+              <button class="logoutBtn"></i>로그아웃</button>
+            </form>
           `;
   } else {
     temp = `<button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>

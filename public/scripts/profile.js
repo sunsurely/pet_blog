@@ -14,7 +14,7 @@ modBtn.addEventListener('click', () => {
   myComment.innerHTML = `<textarea class="inputComment"></textarea>`;
 });
 
-modified.addEventListener('click', () => {
+modified.addEventListener('click', async () => {
   const file = document.querySelector('.modFile').files[0];
   const userComment = document.querySelector('.inputComment').value;
   console.log(userComment);
@@ -28,14 +28,16 @@ modified.addEventListener('click', () => {
   formData.append('userComment', userComment);
   console.log(userComment);
 
-  axios
+  await axios
     .patch('/api/users/profile', formData)
     .then((response) => {
       alert('파일 업로드 성공');
     })
     .catch((error) => {
-      alert(error.response.data.errorMessage);
+      // alert(error.response.data.errorMessage);
+      alert(error);
     });
+  location.reload();
 });
 
 const profileImage = async () => {

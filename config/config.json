@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "",
-    "password": "",
-    "database": "",
-    "host": "",
+    "username": "root",
+    "password": "gogo0808",
+    "database": "pet_blog",
+    "host": "express-batabase.cr8zrzz16qid.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
