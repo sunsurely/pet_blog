@@ -3,48 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
-    />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
     <script src="./scripts/detail.js" defer></script>
-    <script src="./scripts/user.js" defer></script>
     <link rel="stylesheet" href="./styles/detail.css" />
-    <link rel="stylesheet" href="./styles/style.css" />
+
     <link rel="stylesheet" href="./styles/modal.css" />
-    <link rel="stylesheet" href="./styles/write.css" />
     <title>게시글 상세조회</title>
   </head>
   <body>
-    <div class="topIcon">
-      <i
-        class="fi fi-rr-home"
-        id="homeBtn"
-        onclick="location.href='index.html'"
-      ></i>
+    <div class="topBar">
+      <div class="signBox"></div>
+      <header></header>
     </div>
-    <div class="signBox"></div>
-    <header>
-      <h1 onclick="location.href='index.html'">Pet blog</h1>
-    </header>
     <div class="mainBox">
       <div class="postDetailBox">
         <h2>제목</h2>
         <div class="content">
           <p>내용</p>
         </div>
-        <div class="love">
-          <i class="fi fi-rr-heart" id="emptyHeartIcon"></i>
-          <!-- 색깔하트출력안되는중..원인불명 -->
-          <!-- <i class="fi fi-sr-heart"></i> -->
-          <p>좋아요</p>
-        </div>
-        <div class="comment">
-          <i class="fi fi-rr-comment-alt" id="commentIcon"></i>
-          <p>댓글</p>
-        </div>
+        <div class="love"></div>
+        <div class="comment"></div>
       </div>
     </div>
     <!-- 아래는 모달 -->

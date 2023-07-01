@@ -27,7 +27,7 @@ function logout() {
   axios
     .post(`/api/login/logout`)
     .then((response) => {
-      console.log('로그아웃 성공');
+      alert('로그아웃 되었습니다.');
     })
     .catch((error) => {
       console.error('로그아웃 실패: ' + error);
@@ -45,9 +45,6 @@ const initMain = async () => {
     const temp = `
       <div id="${item.postId}"  class="postBox">
       <img class="post-image" src="${item.postImage}"/>
-      <p>${item.title}</p>
-      <p>${item.content}</p>
-      <p>${item.createdAt}</p>
       </div>
     `;
     cardBody.innerHTML += temp;
@@ -73,13 +70,16 @@ function logincheck() {
   if (checkToken) {
     temp = `
     <button class="logoutBtn" onclick="location.href='write.html'"></i>글쓰기</button>
-            <button class="logoutBtn" onclick="location.href='profiles.html'"></i>내 프로필</button>
+            <button class="logoutBtn" onclick="location.href='profiles.html'"></i>프로필</button>
             <button class="logoutBtn" onclick="logout()"></i>로그아웃</button>
           `;
   } else {
     temp = `<button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
-            <button class="loginBtn" onclick="openLoginModal()"></i>로그인</button>
+            <button class="loginBtn" onclick="openLoginModal()">로그인</button>
           `;
   }
   topBar.innerHTML += temp;
 }
+
+const mainHome = document.querySelector('.topBar');
+mainHome.addEventListener('click', () => {});

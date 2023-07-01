@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function () {
+  logincheck();
+});
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
@@ -15,18 +19,14 @@ const getDetail = async (id) => {
            <div class="content">
           <p>${post.content}</p>
           </div>
+          <div class="comment">
+          <img src='../images/reply.png'>
+           </div>
         <div class="love">
-            <i class="fi fi-rr-heart" id="emptyHeartIcon"></i>
-            <!-- 색깔하트출력안되는중..원인불명 -->
-            <!-- <i class="fi fi-sr-heart"></i> -->
-            <p>좋아요</p>
-        </div>
-        <div class="comment">
-            <i class="fi fi-rr-comment-alt" id="commentIcon"></i>
-            <p>댓글</p>
-         </div>
-        <button onclick="getDelete(${id})">삭제버튼</button>
-        <button onclick="updatePost(${id})">수정버튼</button>
+          <img src='../images/heart.png'>
+        </div>    
+        <button class='detailBtn' onclick="getDelete(${id})">삭제</button>
+        <button class='detailBtn' onclick="updatePost(${id})">수정</button>
        </div>`;
   mainBox.innerHTML = temp;
 };
@@ -40,6 +40,48 @@ const getDetail = async (id) => {
 //           <input type="submit" value="Delete"/>
 //         </form>
 // }
+
+function openLoginModal() {
+  let loginModal = $('.loginModal');
+  let pannal = $('.pannal');
+  pannal.show();
+  loginModal.show();
+}
+function opensignUpModal() {
+  let signUpModal = $('.signUpModal');
+  let pannal = $('.pannal');
+  pannal.show();
+  signUpModal.show();
+}
+
+function closeModal() {
+  let loginModal = $('.loginModal');
+  let signUpModal = $('.signUpModal');
+  let pannal = $('.pannal');
+  pannal.hide();
+  loginModal.hide();
+  signUpModal.hide();
+}
+
+function logincheck() {
+  const checkToken = document.cookie.split('=')[1];
+  const topBar = document.querySelector('.signBox');
+  console.log(checkToken);
+  let temp = ``;
+  if (checkToken) {
+    temp = `
+    <button class="logoutBtn" onclick="location.href='write.html'"></i>글쓰기</button>
+            <button class="logoutBtn" onclick="location.href='profiles.html'"></i>프로필</button>
+            <button class="logoutBtn" onclick="logout()"></i>로그아웃</button>
+          `;
+  } else {
+    temp = `<button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
+            <button class="loginBtn" onclick="openLoginModal()"></i>로그인</button>
+          `;
+  }
+  topBar.innerHTML += temp;
+}
+
 async function updatePost(id) {
   const result = await axios.get(`/api/posts/${id}`);
   const post = result.data;
