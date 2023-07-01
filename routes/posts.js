@@ -39,6 +39,7 @@ router.get('/:postId', async (req, res) => {
   }
 });
 
+//게시글 등록
 router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
   const imageUrl = req.file.location;
   console.log(imageUrl);
@@ -54,8 +55,8 @@ router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
     title,
     content,
   });
-
-  return res.status(201).json({ data: post });
+  return res.status(201).json({});
+  // return res.status(201).redirect('/');
 });
 
 // 게시글 수정 API

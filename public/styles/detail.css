@@ -59,3 +59,43 @@
 .love:hover {
   color: gray;
 }
+
+/*아래 부터 댓글 */
+.commentBox {
+  margin: 5% auto;
+  padding: 20px;
+  width: 60%;
+  min-width: 500px;
+  background-color: white;
+  height: auto;
+  border-radius: 15px;
+}
+
+.commentContent {
+  width: 60%;
+  height: 60px;
+  resize: none;
+}
+
+.commentBtn {
+  width: 20%;
+  height: 60px;
+}
+
+.showCommentBox {
+  margin-top: 30px;
+  background-color: antiquewhite;
+  border-radius: 20px;
+  padding: 8px;
+}
+
+.commentlist {
+  text-align: right;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.commentlist p {
+  color: gray;
+  font-size: 80%;
+}
