@@ -10,6 +10,7 @@
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
     <script src="./scripts/user.js" defer></script>
+    <script src="./scripts/start.js" defer></script>
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/modal.css" />
     <title>Pet blog</title>
@@ -80,9 +81,12 @@
 
           <input class="loginSubmit" type="submit" value="로그인" />
         </form>
-        <button class="signUpMoveBtn" onclick="opensignUpModal()">
-          회원가입
-        </button>
+        <div class="btnSet">
+          <button class="signUpMoveBtn" onclick="opensignUpModal()">
+            회원가입
+          </button>
+          <button class="signUpMoveBtn">닫기</button>
+        </div>
       </div>
     </div>
     <div class="signUpModal">

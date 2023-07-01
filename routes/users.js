@@ -22,7 +22,6 @@ router.get('/me', loginMiddleware, async (req, res) => {
 // 회원가입 API
 router.post('/', async (req, res) => {
   const { nickname, password, confirm } = req.body;
-  console.log(password);
   const pattern = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{3,}$/;
   if (!nickname || !pattern.test(nickname)) {
     return res
@@ -64,7 +63,8 @@ router.post('/', async (req, res) => {
     Nickname: user.nickname,
   });
 
-  return res.status(201).json({ message: '회원가입이 완료되었습니다.' });
+  // return res.status(201).redirect('/');
+  return res.status(201).json({});
 });
 
 //프로필 조회

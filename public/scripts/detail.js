@@ -7,7 +7,6 @@ const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
 
 const getDetail = async (id) => {
-  console.log(id);
   const result = await axios.get(`/api/posts/${id}`);
   const post = result.data;
   const mainBox = document.querySelector('.mainBox');
@@ -23,68 +22,106 @@ const getDetail = async (id) => {
           <img src='../images/reply.png'>
            </div>
         <div class="love">
-          <img src='../images/heart.png'>
-        </div>    
-        <button class='detailBtn' onclick="getDelete(${id})">삭제</button>
-        <button class='detailBtn' onclick="updatePost(${id})">수정</button>
+            <i class="fi fi-rr-heart" id="emptyHeartIcon"></i>
+            <!-- 색깔하트출력안되는중..원인불명 -->
+            <!-- <i class="fi fi-sr-heart"></i> -->
+            <p>좋아요</p>
+        </div>
+        <div class="comment" onclick="commentOnOff()">
+            <i class="fi fi-rr-comment-alt" id="commentIcon"></i>
+            <p>댓글</p>
+         </div>
+        <button onclick="getDelete(${id})">삭제버튼</button>
+        <button onclick="updatePost(${id})">수정버튼</button>
        </div>`;
   mainBox.innerHTML = temp;
 };
 
-{
-  /* <button onclick="location.href = 'index.html'">수정버튼</button> */
-}
-// {
-//    <form method="post" action="/api/posts/${id}" class="deleteBtn">
-//           <input type="hidden" name="_method" value="DELETE" />
-//           <input type="submit" value="Delete"/>
-//         </form>
-// }
+const getComment = async (id) => {
+  const { data } = await axios.get(`/api/comments/posts/${id}/comments`);
+  const comments = data.data;
+  const showCommentBox = document.querySelector('.showCommentBox');
+  showCommentBox.innerHTML = '';
+  comments.forEach((item) => {
+    const temp = `<div class="commentlist">
+                  <h4>${item.comment}</h4>
+                  <p>${item.User.nickname}</p>
+                  <p>${item.createdAt}</p>
+                  <p>${item.updatedAt}</p>
+                  <div class="commentId${item.commentId}"></div>
+                  <button onclick="updateCommentOpen(${item.commentId})" class="updateBtn${item.commentId}">수정하기</button>
+                  <button onclick="deleteComment(${item.commentId})" class="deleteBtn${item.commentId}">삭제하기</button>
+                </div>`;
+    showCommentBox.innerHTML += temp;
+  });
+};
 
-function openLoginModal() {
-  let loginModal = $('.loginModal');
-  let pannal = $('.pannal');
-  pannal.show();
-  loginModal.show();
-}
-function opensignUpModal() {
-  let signUpModal = $('.signUpModal');
-  let pannal = $('.pannal');
-  pannal.show();
-  signUpModal.show();
-}
-
-function closeModal() {
-  let loginModal = $('.loginModal');
-  let signUpModal = $('.signUpModal');
-  let pannal = $('.pannal');
-  pannal.hide();
-  loginModal.hide();
-  signUpModal.hide();
-}
-
-function logincheck() {
-  const checkToken = document.cookie.split('=')[1];
-  const topBar = document.querySelector('.signBox');
-  console.log(checkToken);
-  let temp = ``;
-  if (checkToken) {
-    temp = `
-    <button class="logoutBtn" onclick="location.href='write.html'"></i>글쓰기</button>
-            <button class="logoutBtn" onclick="location.href='profiles.html'"></i>프로필</button>
-            <button class="logoutBtn" onclick="logout()"></i>로그아웃</button>
-          `;
+const commentOnOff = () => {
+  const commentBox = document.querySelector('.commentBox');
+  console.log(commentBox.style.display);
+  if (commentBox.style.display == 'block') {
+    commentBox.style.display = 'none';
   } else {
-    temp = `<button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
-            <button class="loginBtn" onclick="openLoginModal()"></i>로그인</button>
-          `;
+    commentBox.style.display = 'block';
   }
-  topBar.innerHTML += temp;
-}
+};
+
+const updateCommentOpen = async (commentid) => {
+  const commentSelect = document.querySelector(`.commentId${commentid}`);
+  const updateBtn = document.querySelector(`.updateBtn${commentid}`);
+  const deleteBtn = document.querySelector(`.deleteBtn${commentid}`);
+  await axios
+    .post(`/api/comments/posts/${id}/comments/${commentid}`, {})
+    .then((response) => {
+      commentSelect.innerHTML = '';
+      const temp = `<div class="allUpdateInputContent">
+                      <textarea class="commentUpdateContent${commentid}"></textarea>
+                      <button class="commentBtn" type="button" onclick="updateComment(${commentid})">
+                        수정하기
+                      </button>
+                  </div>`;
+      commentSelect.innerHTML += temp;
+      updateBtn.style.display = 'none';
+      deleteBtn.style.display = 'none';
+    })
+    .catch((error) => {
+      alert('수정 할 수 없습니다.');
+      console.error('업로드 실패: ' + error);
+    });
+};
+
+const updateComment = async (commentid) => {
+  const comment = document.querySelector(
+    `.commentUpdateContent${commentid}`,
+  ).value;
+  await axios
+    .put(`/api/comments/posts/${id}/comments/${commentid}`, {
+      comment: comment,
+    })
+    .then((response) => {
+      console.log('수정이 완료되었습니다.');
+    })
+    .catch((error) => {
+      alert('수정 할 수 없습니다.');
+      console.error('업로드 실패: ' + error);
+    });
+  window.location.reload();
+};
+
+const deleteComment = async (commentid) => {
+  await axios
+    .delete(`/api/comments/posts/${id}/comments/${commentid}`)
+    .then((response) => {
+      console.log('삭제가 완료되었습니다.');
+    })
+    .catch((error) => {
+      alert('삭제 권한이 없습니다.');
+      console.error('업로드 실패: ' + error);
+    });
+  window.location.reload();
+};
 
 async function updatePost(id) {
-  const result = await axios.get(`/api/posts/${id}`);
-  const post = result.data;
   const mainBox = document.querySelector('.mainBox');
   mainBox.innerHTML = '';
   const temp = `
@@ -97,18 +134,16 @@ async function updatePost(id) {
         <button class="updateBtn">수정하기</button>`;
   mainBox.innerHTML = temp;
   const updateBtn = document.querySelector('.updateBtn');
-  updateBtn.addEventListener('click', () => {
-    console.log('asd');
+  updateBtn.addEventListener('click', async () => {
     const title = document.querySelector('.postTitle').value;
     const content = document.querySelector('.postTextArea').value;
     const file = document.querySelector('.addPostImage').files[0];
-    console.log('파일입니다: ' + file);
     const formData = new FormData();
     formData.append('image', file);
     formData.append('title', title);
     formData.append('content', content);
 
-    axios
+    await axios
       .patch(`/api/posts/${id}`, formData)
       .then((response) => {
         console.log('업로드 성공');
@@ -116,160 +151,35 @@ async function updatePost(id) {
       .catch((error) => {
         console.error('업로드 실패: ' + error);
       });
-    window.location.href = 'index.html';
+    window.location.reload();
   });
 }
 
-function selectData() {
-  console.log('asd');
-  const title = document.querySelector('.postTitle').value;
-  const content = document.querySelector('.postTextArea').value;
-  const file = document.querySelector('.addPostImage').value;
-  console.log('파일입니다: ' + file);
-  const formData = new FormData();
-  formData.append('image', file);
-  formData.append('title', title);
-  formData.append('content', content);
-
-  axios
-    .patch(`/api/posts/${id}`, formData)
-    .then((response) => {
-      console.log('업로드 성공');
-    })
-    .catch((error) => {
-      console.error('업로드 실패: ' + error);
-    });
-  // return getPut(title, content, file);
-}
-
-function getDelete() {
-  axios
+async function getDelete() {
+  await axios
     .delete(`/api/posts/${id}`)
     .then((response) => {
-      alert(response);
+      window.location.href = 'index.html';
     })
     .catch((error) => {
       alert(error);
     });
 }
 
-function getPut(title, content, image) {
-  $.ajax({
-    type: 'PUT',
-    url: `/api/posts/${id}`,
-    data: {
-      title,
-      content,
-      image,
-    },
-    error: function (xhr, status, error) {
-      if (status == 401) {
-        alert('로그인이 필요합니다.');
-      } else {
-        localStorage.clear();
-        alert('알 수 없는 문제가 발생했습니다. 관리자에게 문의하세요.');
-      }
-      window.location.href = 'index.html';
-    },
-  });
-  window.location.href = 'index.html';
+async function postComment() {
+  const comment = document.querySelector('.commentContent').value;
+
+  await axios
+    .post(`/api/comments/posts/${id}/comments`, { comment: comment })
+    .then((response) => {
+      console.log('댓글저장성공');
+    })
+    .catch((error) => {
+      alert('댓글형식이 올바르지 않습니다.');
+      console.error('업로드 실패: ' + error);
+    });
+  window.location.reload();
 }
 
 getDetail(id);
-
-//
-
-// // const updateBtn = document.querySelector('.updateBtn');
-
-// // updateBtn.addEventListener('click', () => {
-// //   const title = document.querySelector('.postTitle').value;
-// //   const content = document.querySelector('.postTextArea').textContent;
-// //   const file = document.querySelector('.addPostImage').file[0];
-
-// //   const formData = new FormData();
-// //   formData.append('image', file);
-// //   formData.append('title', title);
-// //   formData.append('content', content);
-
-// //   axios
-// //     .put(`/api/posts/${id}`, formData)
-// //     .then((response) => {
-// //       console.log('업로드 성공');
-// //     })
-// //     .catch((error) => {
-// //       console.error('업로드 실패: ' + error);
-// //     });
-// // });
-
-// function selectData2() {
-//   const title = document.querySelector('.postTitle').value;
-//   const content = document.querySelector('.postTextArea').textContent;
-//   const file = document.querySelector('.addPostImage').file[0];
-
-//   const formData = new FormData();
-//   formData.append('image', file);
-//   formData.append('title', title);
-//   formData.append('content', content);
-
-//   axios
-//     .put(`/api/posts/${id}`, formData)
-//     .then((response) => {
-//       console.log('업로드 성공');
-//     })
-//     .catch((error) => {
-//       console.error('업로드 실패: ' + error);
-//     });
-// }
-
-// function selectData() {
-//   console.log('가나다라');
-//   const title = document.querySelector('.postTitle').value;
-//   const content = document.querySelector('.postTextArea').textContent;
-//   const file = document.querySelector('.addPostImage').file[0];
-//   console.log('file:' + file);
-//   return getPut(title, content, file);
-// }
-
-// function getDelete(callback) {
-//   $.ajax({
-//     type: 'DELETE',
-//     url: `/api/posts/${id}`,
-//     success: function (response) {
-//       callback(response.user);
-//     },
-//     error: function (xhr, status, error) {
-//       if (status == 401) {
-//         alert('로그인이 필요합니다.');
-//       } else {
-//         localStorage.clear();
-//         alert('알 수 없는 문제가 발생했습니다. 관리자에게 문의하세요.');
-//       }
-//       window.location.href = 'index.html';
-//     },
-//   });
-//   window.location.href = 'index.html';
-// }
-
-// function getPut(title, content, image) {
-//   $.ajax({
-//     type: 'PUT',
-//     url: `/api/posts/${id}`,
-//     data: {
-//       title,
-//       content,
-//       image,
-//     },
-//     error: function (xhr, status, error) {
-//       if (status == 401) {
-//         alert('로그인이 필요합니다.');
-//       } else {
-//         localStorage.clear();
-//         alert('알 수 없는 문제가 발생했습니다. 관리자에게 문의하세요.');
-//       }
-//       window.location.href = 'index.html';
-//     },
-//   });
-//   window.location.href = 'index.html';
-// }
-
-// getDetail(id);
+getComment(id);

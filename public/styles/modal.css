@@ -74,14 +74,17 @@
 
 .signUpMoveBtn {
   float: right;
-  width: 50%;
+  width: 35%;
   background-color: #4caf50;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 8px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+.btnSet {
+  margin-right: 50px;
 }
 
 .signUpSubmit:hover {
