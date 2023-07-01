@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   initMain(); //첫 메인페이지 접속시 조회화면
+  logincheck();
 });
 
 function openLoginModal() {
@@ -61,3 +62,24 @@ const initMain = async () => {
     });
   });
 };
+
+//로그인 체크
+
+function logincheck() {
+  const checkToken = document.cookie.split('=')[1];
+  const topBar = document.querySelector('.signBox');
+  console.log(checkToken);
+  let temp = ``;
+  if (checkToken) {
+    temp = `
+    <button class="logoutBtn" onclick="location.href='write.html'"></i>글쓰기</button>
+            <button class="logoutBtn" onclick="location.href='profiles.html'"></i>내 프로필</button>
+            <button class="logoutBtn" onclick="logout()"></i>로그아웃</button>
+          `;
+  } else {
+    temp = `<button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
+            <button class="loginBtn" onclick="openLoginModal()"></i>로그인</button>
+          `;
+  }
+  topBar.innerHTML += temp;
+}

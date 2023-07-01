@@ -4,35 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-    rel="stylesheet"
-    href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
     />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      defer
+    ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
     <script src="./scripts/user.js" defer></script>
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/modal.css" />
     <title>Pet blog</title>
-    </head>
+  </head>
 
   <body>
     <div class="topBar">
       <div class="topIcon">
         <i class="fi fi-rr-home" id="homeBtn" onclick="location.reload()"></i>
       </div>
-      <div class="signBox">
-        <button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
-        <button class="loginBtn" onclick="openLoginModal()"></i>로그인</button>
-        <button class="logoutBtn" >로그아웃</button>
-      </div>
+      <div class="signBox"></div>
       <header>
         <h1 onclick="location.reload()">Pet blog</h1>
       </header>
     </div>
 
     <div class="body">
-      
       <div class="postBox" onclick="location.href='detail.html'">
         <p>제목입니다.</p>
         <p>내용입니다.가나다라마바사</p>
@@ -61,53 +59,83 @@
         <p>제목입니다.</p>
         <p>내용입니다.가나다라마바사</p>
       </div>
-      
     </div>
     <!-- 아래는 모달 -->
-    <div class="pannal">
-    </div>
+    <div class="pannal"></div>
     <div class="loginModal">
-      <i class="fi fi-rr-cross-small" onclick="closeModal()" id="modalCloseBtn"></i>
+      <i
+        class="fi fi-rr-cross-small"
+        onclick="closeModal()"
+        id="modalCloseBtn"
+      ></i>
       <h3>로그인</h3>
-          <div class="modalBox">
-            <form action="/api/login" method="post">
-              <label for="fname">닉네임</label>
-              <input type="text" name="nickname" class="nicknameText" placeholder="Your name..">
+      <div class="modalBox">
+        <form action="/api/login" method="post">
+          <label for="fname">닉네임</label>
+          <input
+            type="text"
+            name="nickname"
+            class="nicknameText"
+            placeholder="Your name.."
+          />
 
-              <label for="name">비밀번호</label>
-              <input type="password" name="password" class="passwordText" placeholder="Your last name..">
-            
-              <input class="loginSubmit" type="submit" value="로그인">
-            </form>
-            <button class="signUpMoveBtn" onclick="opensignUpModal()">회원가입</button>
-          </div>
+          <label for="name">비밀번호</label>
+          <input
+            type="password"
+            name="password"
+            class="passwordText"
+            placeholder="Your last name.."
+          />
+
+          <input class="loginSubmit" type="submit" value="로그인" />
+        </form>
+        <button class="signUpMoveBtn" onclick="opensignUpModal()">
+          회원가입
+        </button>
+      </div>
     </div>
     <div class="signUpModal">
-      <i class="fi fi-rr-cross-small" onclick="closeModal()" id="modalCloseBtn"></i>
+      <i
+        class="fi fi-rr-cross-small"
+        onclick="closeModal()"
+        id="modalCloseBtn"
+      ></i>
       <h3>회원가입</h3>
-          <div class="modalBox">
-            <form action="/api/users" method="post" >
-              <label for="fname">닉네임</label>
-              <input type="text" name="nickname" class="nicknameText" placeholder="Your name..">
+      <div class="modalBox">
+        <form action="/api/users" method="post">
+          <label for="fname">닉네임</label>
+          <input
+            type="text"
+            name="nickname"
+            class="nicknameText"
+            placeholder="Your name.."
+          />
 
+          <label for="lname">패스워드</label>
+          <input
+            type="text"
+            name="password"
+            class="passwordText"
+            placeholder="Your last name.."
+          />
 
-              <label for="lname">패스워드</label>
-              <input type="text" name="password" class="passwordText" placeholder="Your last name..">
-              
-              <label for="lname">패스워드 확인</label>
-              <input type="text" name="confirm" class="passwordText" placeholder="Your last name..">
+          <label for="lname">패스워드 확인</label>
+          <input
+            type="text"
+            name="confirm"
+            class="passwordText"
+            placeholder="Your last name.."
+          />
 
-
-              <!-- <label for="lname">프로필사진</label>
+          <!-- <label for="lname">프로필사진</label>
               <input type="file"> -->
 
-              <!-- <label for="lname">사진자리 나중에 추가</label>
+          <!-- <label for="lname">사진자리 나중에 추가</label>
               <input type="image" name="password" class="passwordText" placeholder="Your last name.."> -->
-            
-              <input class="signUpSubmit" type="submit" value="회원가입">
-            </form>
-          </div>
+
+          <input class="signUpSubmit" type="submit" value="회원가입" />
+        </form>
+      </div>
     </div>
   </body>
-  
 </html>
