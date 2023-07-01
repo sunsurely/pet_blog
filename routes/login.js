@@ -7,13 +7,6 @@ const bcrypt = require('bcrypt');
 // 로그인 API
 router.post('/', async (req, res) => {
   const { nickname, password } = req.body;
-  const { authorization } = req.cookies;
-  console.log(authorization);
-
-  // 이미 로그인 중이라면
-  if (authorization) {
-    return res.status(400).json({ errorMessage: '현재 로그인 상태입니다.' });
-  }
 
   const user = await Users.findOne({
     where: { nickname },
@@ -35,7 +28,7 @@ router.post('/', async (req, res) => {
   }
 
   // jwt 생성
-  const token = jwt.sign({ usersId: user.usersId }, 'costomized-secret-key', {
+  const token = jwt.sign({ userId: user.userId }, 'costomized-secret-key', {
     expiresIn: '1h',
   }); // 1시간후 토큰 자동 만료
   res.cookie('authorization', `Bearer ${token}`);

@@ -31,10 +31,10 @@ modified.addEventListener('click', () => {
   axios
     .patch('/api/users/profile', formData)
     .then((response) => {
-      console.log('파일 업로드 성공');
+      alert('파일 업로드 성공');
     })
     .catch((error) => {
-      console.error('파일 업로드 오류:', error);
+      alert(error.response.data.errorMessage);
     });
 });
 

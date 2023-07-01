@@ -10,9 +10,9 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="modal.css" />
+    <script src="./scripts/user.js" defer></script>
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/modal.css" />
     <title>Pet blog</title>
     </head>
 
@@ -24,7 +24,7 @@
       <div class="signBox">
         <button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
         <button class="loginBtn" onclick="openLoginModal()"></i>로그인</button>
-        <!-- <button class="logoutBtn" onclick="로그아웃함수"></i>로그아웃</button> -->
+        <button class="logoutBtn" >로그아웃</button>
       </div>
       <header>
         <h1 onclick="location.reload()">Pet blog</h1>
@@ -74,7 +74,7 @@
               <label for="fname">닉네임</label>
               <input type="text" name="nickname" class="nicknameText" placeholder="Your name..">
 
-              <label for="lname">비밀번호</label>
+              <label for="name">비밀번호</label>
               <input type="password" name="password" class="passwordText" placeholder="Your last name..">
             
               <input class="loginSubmit" type="submit" value="로그인">
@@ -109,5 +109,5 @@
           </div>
     </div>
   </body>
-  <script src="./user.js"></script>
+  
 </html>
