@@ -82,7 +82,7 @@ const updateCommentOpen = async (commentid) => {
     .then((response) => {
       commentSelect.innerHTML = '';
       const temp = `<div class="allUpdateInputContent">
-                      <textarea class="commentUpdateContent${commentid}"></textarea>
+                      <textarea id="commentUpdateContent"class="commentUpdateContent${commentid}"  maxlength="15"></textarea>
                       <button class="commentBtn" type="button" onclick="updateComment(${commentid})">
                         수정하기
                       </button>
@@ -92,8 +92,8 @@ const updateCommentOpen = async (commentid) => {
       deleteBtn.style.display = 'none';
     })
     .catch((error) => {
-      alert('수정 할 수 없습니다.');
-      console.error('업로드 실패: ' + error);
+      alert(error.response.data.errorMessage);
+      location.reload();
     });
 };
 
@@ -107,31 +107,29 @@ const updateComment = async (commentid) => {
     })
     .then((response) => {
       console.log('수정이 완료되었습니다.');
+      location.reload();
     })
     .catch((error) => {
-      alert('수정 할 수 없습니다.');
-      console.error('업로드 실패: ' + error);
+      alert(error.response.data.errorMessage);
+      location.reload();
     });
-  window.location.reload();
 };
 
 const deleteComment = async (commentid) => {
   await axios
     .delete(`/api/comments/posts/${id}/comments/${commentid}`)
     .then((response) => {
-      console.log('삭제가 완료되었습니다.');
+      location.reload();
     })
     .catch((error) => {
-      alert('삭제 권한이 없습니다.');
-      console.error('업로드 실패: ' + error);
+      alert(error.response.data.errorMessage);
+      location.reload();
     });
-  window.location.reload();
 };
 
 async function updatePost(id) {
   const loginCheck = localStorage.getItem('isLoggedIn');
   const checkToken = document.cookie.split('=')[1];
-
   console.log(loginCheck);
   if (!checkToken) {
     openLoginModal();
@@ -163,11 +161,12 @@ async function updatePost(id) {
         .patch(`/api/posts/${id}`, formData)
         .then((response) => {
           console.log('업로드 성공');
+          location.reload();
         })
         .catch((error) => {
-          console.error('업로드 실패: ' + error);
+          alert(error.response.data.errorMessage);
+          location.reload();
         });
-      window.location.reload();
     });
   }
 }
@@ -179,7 +178,8 @@ async function getDelete() {
       window.location.href = 'index.html';
     })
     .catch((error) => {
-      alert(error);
+      alert(error.response.data.errorMessage);
+      location.reload();
     });
 }
 
@@ -190,12 +190,12 @@ async function postComment() {
     .post(`/api/comments/posts/${id}/comments`, { comment: comment })
     .then((response) => {
       console.log('댓글저장성공');
+      location.reload();
     })
     .catch((error) => {
-      alert('댓글형식이 올바르지 않습니다.');
-      console.error('업로드 실패: ' + error);
+      alert(error.response.data.errorMessage);
+      location.reload();
     });
-  window.location.reload();
 }
 
 function openLoginModal() {

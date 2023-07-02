@@ -259,5 +259,11 @@ body {
 }
 
 .pannal {
+  top:40%
+  position: fixed;
   height: 100%;
+}
+
+#commentUpdateContent {
+  resize: none;
 }

@@ -22,30 +22,26 @@ function opensignUpModal() {
   pannal.show();
   signUpModal.show();
 }
-
-const logout = () => {
-  axios
+async function logout() {
+  await axios
     .post(`/api/login/logout`)
     .then((response) => {
-      window.localStorage.setItem('isLoggedIn', false);
       alert('로그아웃 되었습니다.');
       location.reload();
     })
     .catch((error) => {
-      console.error('로그아웃 실패: ' + error);
+      alert(error.response.data.errorMessage);
+      location.reload();
     });
-  window.localStorage.setItem('isLoggedIn', false);
-};
+}
 
+//로그인
 const loginSubmit = document.querySelector('.loginSubmit');
-console.log(loginSubmit);
 
 loginSubmit.addEventListener('click', async (e) => {
   e.preventDefault();
   const nickname = document.querySelector('.nicknameText').value;
-  console.log(nickname);
   const password = document.querySelector('.passwordText').value;
-  console.log(password);
   const data = {
     nickname: nickname,
     password: password,
@@ -58,12 +54,12 @@ loginSubmit.addEventListener('click', async (e) => {
       },
     })
     .then((response) => {
-      localStorage.setItem('isLoggedIn', true);
       alert('로그인 되었습니다.');
       location.reload();
     })
     .catch((error) => {
-      alert(error);
+      alert(error.response.data.errorMessage);
+      location.reload();
     });
 });
 
@@ -72,7 +68,6 @@ loginSubmit.addEventListener('click', async (e) => {
 function logincheck() {
   const checkToken = document.cookie.split('=')[1];
   const topBar = document.querySelector('.signBox');
-  console.log(checkToken);
   let temp = ``;
   if (checkToken) {
     temp = `
@@ -92,3 +87,5 @@ function logincheck() {
   }
   topBar.innerHTML += temp;
 }
+
+//로그인 체크

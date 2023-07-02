@@ -45,6 +45,9 @@ router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
 
   const { userId } = res.locals.user;
   const { title, content } = req.body;
+  if (title == '' || content == '') {
+    return res.status(401).redirect('/');
+  }
   const user = await Users.findOne({
     where: { userId },
   });

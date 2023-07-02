@@ -19,7 +19,6 @@ router.post('/', async (req, res) => {
 
   // 입력한 비밀번호가, 암호화 된 비밀번호와 일치하는지 확인
   const passwordOk = await bcrypt.compare(password, user.password);
-  console.log(passwordOk);
 
   if (!passwordOk) {
     return res
@@ -51,7 +50,6 @@ router.post('/logout', (req, res) => {
     }
 
     res.clearCookie('authorization');
-
     return res.redirect('/');
   } catch (err) {
     res.status(404).json({ errorMessage: '로그아웃에 실패했습니다.' });
