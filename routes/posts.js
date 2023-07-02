@@ -41,20 +41,32 @@ router.get('/:postId', async (req, res) => {
 
 //게시글 등록
 router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
-  const imageUrl = req.file.location;
-  console.log(imageUrl);
+  const file = req.file;
+
   const { userId } = res.locals.user;
   const { title, content } = req.body;
   const user = await Users.findOne({
     where: { userId },
   });
-  const post = await Posts.create({
-    postImage: imageUrl, // 데이타베이스 postImage 항목 추가로  이름 변경
-    UserId: userId,
-    nickname: user.nickname,
-    title,
-    content,
-  });
+
+  if (file) {
+    const imageUrl = req.file.location;
+    await Posts.create({
+      postImage: imageUrl, // 데이타베이스 postImage 항목 추가로  이름 변경
+      UserId: userId,
+      nickname: user.nickname,
+      title,
+      content,
+    });
+  } else {
+    await Posts.create({
+      postImage: '../images/baseImage.PNG',
+      UserId: userId,
+      nickname: user.nickname,
+      title,
+      content,
+    });
+  }
 
   return res.status(201).redirect('/');
 });
@@ -65,9 +77,8 @@ router.patch(
   loginMiddleware,
   upload.single('image'),
   async (req, res) => {
-    const imageUrl = req.file.location;
-    // const postImage =
-    //   'https://pet-blog.s3.ap-northeast-2.amazonaws.com/1688136982547_%C3%AD%C2%9A%C2%8C%C3%AC%C2%9D%C2%98%C3%AB%C2%A1%C2%9D.PNG';
+    const file = req.file;
+
     const { userId } = res.locals.user;
     const { postId } = req.params;
     const { title, content } = req.body;
@@ -82,14 +93,26 @@ router.patch(
         .json({ errorMessage: '게시물을 수정할 수 없습니다.' });
     }
 
-    await Posts.update(
-      { postImage: imageUrl, title, content },
-      {
-        where: {
-          [Op.and]: [{ postId }, { userId }],
+    if (file) {
+      const imageUrl = req.file.location;
+      await Posts.update(
+        { postImage: imageUrl, title, content },
+        {
+          where: {
+            [Op.and]: [{ postId }, { userId }],
+          },
         },
-      },
-    );
+      );
+    } else {
+      await Posts.update(
+        { title, content },
+        {
+          where: {
+            [Op.and]: [{ postId }, { userId }],
+          },
+        },
+      );
+    }
 
     res.status(201).json({ message: '게시물을 수정했습니다.' });
   },
