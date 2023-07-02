@@ -46,3 +46,8 @@
 .writeForm {
   margin-bottom: 50px;
 }
+
+.goWrite {
+  position: absolute;
+  top: 10%;
+}

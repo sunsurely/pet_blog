@@ -75,7 +75,7 @@ function logincheck() {
   if (checkToken) {
     temp = `
     <button class="logoutBtn" onclick="location.href='write.html'"></i>글쓰기</button>
-            <button class="logoutBtn goProfile" onclick="location.href='profiles.html'"></i>내 프로필</button>
+            <button class="logoutBtn goProfile" onclick="location.href='profiles.html'">프로필</button>
             <form action="/api/login/logout" method="post">
               <button class="logoutBtn"></i>로그아웃</button>
             </form>

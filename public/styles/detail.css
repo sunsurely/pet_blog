@@ -60,6 +60,8 @@ body {
   margin-right: 5px;
 }
 .signUpBtn {
+  position: absolute;
+  top: 30%;
   margin: 2px 5px;
   cursor: pointer;
   display: block;
@@ -154,23 +156,12 @@ body {
   cursor: pointer;
 }
 
-.signBox {
-  display: flex;
-  width: 200px;
-  flex-direction: row;
-  margin-top: 10px;
-  margin-right: 20px;
-  position: absolute;
-  top: 83%;
-  left: 70%;
-  float: right;
-}
-
 .logoutBtn {
   margin: 2px 5px;
   cursor: pointer;
   display: block;
   padding: 7px 10px;
+  color: white;
   background: #e95016;
   border: none;
   font-weight: bold;
@@ -229,4 +220,20 @@ body {
   font-weight: bold;
   font-size: 15px;
   border-radius: 5px;
+}
+
+.writeBtn {
+  position: absolute;
+  top: 30%;
+  left: 45%;
+}
+.goProfile {
+  position: absolute;
+  top: 30%;
+  left: 49%;
+}
+.btnLogout {
+  position: absolute;
+  top: 30%;
+  left: 53%;
 }

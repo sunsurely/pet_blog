@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function () {
+  logincheck();
+});
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
@@ -15,20 +19,20 @@ const getDetail = async (id) => {
           <p>${post.content}</p>
           </div>
           <div class="comment">
-          
+          <img src='../images/reply.png'>
            </div>
         <div class="love">
             <i class="fi fi-rr-heart" id="emptyHeartIcon"></i>
             <!-- 색깔하트출력안되는중..원인불명 -->
             <!-- <i class="fi fi-sr-heart"></i> -->
-            <img class='likeButton' onclick='likeChange(this.src)' src='../images/heart.png'>
+            <p>좋아요</p>
         </div>
         <div class="comment" onclick="commentOnOff()">
             <i class="fi fi-rr-comment-alt" id="commentIcon"></i>
-            <img src='../images/reply.png'>
+            <p>댓글</p>
          </div>
-        <button class='deleteBtn' onclick="getDelete(${id})">삭제</button>
-        <button class='deleteBtn' onclick="updatePost(${id})">수정</button>
+        <button onclick="getDelete(${id})">삭제버튼</button>
+        <button onclick="updatePost(${id})">수정버튼</button>
        </div>`;
   mainBox.innerHTML = temp;
 };
@@ -40,17 +44,14 @@ const getComment = async (id) => {
   showCommentBox.innerHTML = '';
   comments.forEach((item) => {
     const temp = `<div class="commentlist">
-                  <p>${item.User.nickname}님</p>
-                  <h4>${item.comment}</h4>                 
+                  <h4>${item.comment}</h4>
+                  <p>${item.User.nickname}</p>
+                  <p>${item.createdAt}</p>
+                  <p>${item.updatedAt}</p>
                   <div class="commentId${item.commentId}"></div>
-                  <p class='createdAt'>${item.createdAt}</p>
-                  <div class='commentBtnSet'>
-                    <button onclick="updateCommentOpen(${item.commentId})" class="updateBtn${item.commentId}">수정</button>
-                    <button onclick="deleteComment(${item.commentId})" class="deleteBtn${item.commentId}">삭제</button>
-             </div>
-       
+                  <button onclick="updateCommentOpen(${item.commentId})" class="updateBtn${item.commentId}">수정하기</button>
+                  <button onclick="deleteComment(${item.commentId})" class="deleteBtn${item.commentId}">삭제하기</button>
                 </div>`;
-
     showCommentBox.innerHTML += temp;
   });
 };
@@ -182,21 +183,3 @@ async function postComment() {
 
 getDetail(id);
 getComment(id);
-
-const mainHome = document.querySelector('.topBar');
-mainHome.addEventListener('click', () => {
-  window.location.href = '/';
-});
-
-function likeChange(src) {
-  const like = document.querySelector('.likeButton');
-  const urls = [
-    'http://localhost:3000/images/heart.png',
-    'http://localhost:3000/images/heart2.png',
-  ];
-  if (src === urls[0]) {
-    like.src = urls[1];
-  } else {
-    like.src = urls[0];
-  }
-}

@@ -65,9 +65,8 @@ router.patch(
   loginMiddleware,
   upload.single('image'),
   async (req, res) => {
-    const imageUrl = req.file.location;
-    // const postImage =
-    //   'https://pet-blog.s3.ap-northeast-2.amazonaws.com/1688136982547_%C3%AD%C2%9A%C2%8C%C3%AC%C2%9D%C2%98%C3%AB%C2%A1%C2%9D.PNG';
+    const File = req.file;
+
     const { userId } = res.locals.user;
     const { postId } = req.params;
     const { title, content } = req.body;
@@ -82,19 +81,29 @@ router.patch(
         .json({ errorMessage: '게시물을 수정할 수 없습니다.' });
     }
 
-    await Posts.update(
-      { postImage: imageUrl, title, content },
-      {
-        where: {
-          [Op.and]: [{ postId }, { userId }],
+    if (yesFile) {
+      const imageUrl = req.file.location;
+      await Posts.update(
+        { postImage: imageUrl, title, content },
+        {
+          where: {
+            [Op.and]: [{ postId }, { userId }],
+          },
         },
-      },
-    );
-
+      );
+    } else {
+      await Posts.update(
+        { title, content },
+        {
+          where: {
+            [Op.and]: [{ postId }, { userId }],
+          },
+        },
+      );
+    }
     res.status(201).json({ message: '게시물을 수정했습니다.' });
   },
 );
-
 // 게시글 삭제 API
 router.delete('/:postId', loginMiddleware, async (req, res) => {
   const { userId } = res.locals.user;
