@@ -35,7 +35,6 @@ modified.addEventListener('click', async () => {
       alert('파일 업로드 성공');
     })
     .catch((error) => {
-      // alert(error.response.data.errorMessage);
       alert(error);
     });
   location.reload();

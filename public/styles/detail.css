@@ -230,3 +230,39 @@ body {
   font-size: 15px;
   border-radius: 5px;
 }
+
+.postTitle {
+  margin-top: 10px;
+  margin-left: 2.5%;
+  background-color: rgb(233, 233, 240);
+  width: 90%;
+  height: 82%;
+  min-height: 30px;
+  border-radius: 15px;
+  padding: 5px;
+  resize: none;
+}
+
+.postTextArea {
+  margin-top: 20px;
+  width: 90%;
+  background-color: rgb(233, 233, 240);
+  height: 82%;
+  min-height: 460px;
+  border-radius: 15px;
+  padding: 25px;
+  resize: none;
+}
+
+.updateBtn {
+  margin-top: 5px;
+  cursor: pointer;
+  display: inline;
+  padding: 7px 10px;
+  background: #e95016;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 5px;
+}

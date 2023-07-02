@@ -19,8 +19,6 @@ const getDetail = async (id) => {
            </div>
         <div class="love">
             <i class="fi fi-rr-heart" id="emptyHeartIcon"></i>
-            <!-- 색깔하트출력안되는중..원인불명 -->
-            <!-- <i class="fi fi-sr-heart"></i> -->
             <img class='likeButton' onclick='likeChange(this.src)' src='../images/heart.png'>
         </div>
         <div class="comment" onclick="commentOnOff()">
@@ -57,7 +55,6 @@ const getComment = async (id) => {
 
 const commentOnOff = () => {
   const commentBox = document.querySelector('.commentBox');
-  console.log(commentBox.style.display);
   if (commentBox.style.display == 'block') {
     commentBox.style.display = 'none';
   } else {
@@ -124,13 +121,15 @@ async function updatePost(id) {
   const mainBox = document.querySelector('.mainBox');
   mainBox.innerHTML = '';
   const temp = `
+      <div class="postDetailBox">
         <form method="post" action="">
           <input type="hidden" name="_method" value="put">
           <input type="text" name="title" class="postTitle" placeholder="제목을 입력해주세요.">
-          <textarea class="postTextArea" name="content" rows="45", cols="100"></textarea>
+          <textarea class="postTextArea" name="content" rows="35", cols="70"></textarea>
           <input type="file" name="image" class="addPostImage">
         </form>
-        <button class="updateBtn">수정하기</button>`;
+        <button class="updateBtn">수정하기</button>
+      </div>`;
   mainBox.innerHTML = temp;
   const updateBtn = document.querySelector('.updateBtn');
   updateBtn.addEventListener('click', async () => {
