@@ -27,24 +27,21 @@ async function logout() {
     .post(`/api/login/logout`)
     .then((response) => {
       alert('로그아웃 되었습니다.');
+      location.reload();
     })
     .catch((error) => {
-      console.error('로그아웃 실패: ' + error);
+      alert(error.response.data.errorMessage);
+      location.reload();
     });
-
-  window.location.reload();
 }
 
-//로그인 시 로그아웃 타이머 기능 구현
+//로그인
 const loginSubmit = document.querySelector('.loginSubmit');
-console.log(loginSubmit);
 
 loginSubmit.addEventListener('click', async (e) => {
   e.preventDefault();
   const nickname = document.querySelector('.nicknameText').value;
-  console.log(nickname);
   const password = document.querySelector('.passwordText').value;
-  console.log(password);
   const data = {
     nickname: nickname,
     password: password,
@@ -61,7 +58,8 @@ loginSubmit.addEventListener('click', async (e) => {
       location.reload();
     })
     .catch((error) => {
-      alert(error);
+      alert(error.response.data.errorMessage);
+      location.reload();
     });
 });
 
@@ -70,7 +68,6 @@ loginSubmit.addEventListener('click', async (e) => {
 function logincheck() {
   const checkToken = document.cookie.split('=')[1];
   const topBar = document.querySelector('.signBox');
-  console.log(checkToken);
   let temp = ``;
   if (checkToken) {
     temp = `

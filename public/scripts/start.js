@@ -24,7 +24,6 @@ const initMain = async () => {
     item.addEventListener('click', () => {
       const id = item.getAttribute('id');
       window.location.href = `/detail.html?id=${id}`;
-      console.log(id);
     });
   });
 };

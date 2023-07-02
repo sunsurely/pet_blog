@@ -6,8 +6,7 @@ const loginMiddleware = async (req, res, next) => {
   const [authType, authToken] = (authorization ?? '').split(' ');
 
   if (!authorization) {
-    // return res.status(403).redirect('/');
-    return res.status(403).json({ errorMessage: '토큰이 존재하지 않습니다.' });
+    return res.status(403).json({ errorMessage: '권한이 존재하지 않습니다.' });
   }
 
   if (authType !== 'Bearer' || !authToken) {
