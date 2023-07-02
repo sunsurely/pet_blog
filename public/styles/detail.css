@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap');
 
+* {
+  margin: 0px;
+  padding: 0;
+}
+
 body {
-  background: #e0e0e0;
+  background: url('../images/123.png');
 }
 
 .mainBox {
@@ -104,49 +109,43 @@ body {
 
 /*아래 부터 댓글 */
 .commentBox {
+  display: flex;
   margin: 5% auto;
-  padding: 20px;
-  width: 60%;
+  padding: 5px 20px 0 20px;
+  width: 45%;
   min-width: 500px;
-  background-color: white;
+  background-color: black;
   height: auto;
   border-radius: 15px;
 }
 
 .commentContent {
-  width: 60%;
-  height: 60px;
+  outline: none;
+  margin-bottom: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  width: 80%;
+  height: 100px;
   resize: none;
 }
 
 .commentBtn {
-  width: 20%;
-  height: 60px;
-}
-
-.showCommentBox {
-  margin-top: 30px;
-  background-color: antiquewhite;
-  border-radius: 20px;
-  padding: 8px;
-}
-
-.commentlist {
-  text-align: right;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.commentlist p {
-  color: gray;
-  font-size: 80%;
+  height: 10%;
+  margin-left: 5px;
+  margin-top: 95px;
+  cursor: pointer;
+  padding: 7px 10px;
+  background: #e95016;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 5px;
 }
 
 .topBar {
+  width: 100%;
   height: 350px;
-  position: sticky;
-  top: 0;
-  z-index: 4;
   background-image: url('../images/logo.png');
   background-size: 100% 350px;
   background-repeat: no-repeat;
@@ -157,11 +156,13 @@ body {
 
 .signBox {
   display: flex;
+  width: 200px;
+  flex-direction: row;
   margin-top: 10px;
   margin-right: 20px;
   position: absolute;
   top: 83%;
-  left: 44%;
+  left: 70%;
   float: right;
 }
 
@@ -177,12 +178,53 @@ body {
   border-radius: 5px;
 }
 
-.detailBtn {
-  margin: 10px 10px;
+.deleteBtn {
+  margin: 4px 5px;
   cursor: pointer;
   display: inline;
   padding: 7px 10px;
   background: #e95016;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.showCommentBox {
+  display: columns;
+  margin: 30px auto auto 33rem;
+  width: 50rem;
+}
+
+.commentlist {
+  width: 50rem;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  background: #e9e9f0;
+  margin-top: 10px;
+  border-radius: 5px;
+  margin-bottom: 50px;
+}
+
+.commentlist p {
+  font-weight: bold;
+  font-size: 80%;
+}
+
+.commentBtnSet {
+  float: right;
+}
+
+.commentBtnSet button {
+  cursor: pointer;
+  display: inline;
+  padding: 7px 10px;
+  background: #e95016;
+  color: white;
   border: none;
   font-weight: bold;
   font-size: 15px;

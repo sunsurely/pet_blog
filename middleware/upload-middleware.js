@@ -43,7 +43,7 @@ const upload = multer({
   storage: multerS3({
     s3: s3Client,
     bucket: 'petblog',
-    acl: 'public-read',
+    acl: 'publicread',
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
       cb(null, `${Date.now()}_${path.basename(file.originalname)}`);

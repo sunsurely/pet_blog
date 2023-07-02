@@ -11,6 +11,7 @@ modBtn.addEventListener('click', () => {
   modified.style.display = 'block';
   modBtn.style.display = 'none';
   myComment.innerHTML = ``;
+  myComment.style.background = 'none';
   myComment.innerHTML = `<textarea class="inputComment"></textarea>`;
 });
 
@@ -42,12 +43,20 @@ modified.addEventListener('click', async () => {
 
 const profileImage = async () => {
   const result = await axios.get('/api/users/profile');
+  const nickname = document.querySelector('.nickname');
   const profile = result.data.data;
   const profileImage = document.querySelector('.myImage');
   const myComment = document.querySelector('.myComment');
+
+  nickname.innerText = profile.Nickname;
 
   if (profile.userImage) profileImage.setAttribute('src', profile.userImage);
   if (profile.userComment) {
     myComment.innerText = `${profile.userComment}`;
   }
 };
+
+const topBar = document.querySelector('.topBar');
+topBar.addEventListener('click', () => {
+  location.href = '/';
+});

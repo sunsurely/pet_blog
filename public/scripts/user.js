@@ -22,8 +22,8 @@ function opensignUpModal() {
   pannal.show();
   signUpModal.show();
 }
-function logout() {
-  axios
+async function logout() {
+  await axios
     .post(`/api/login/logout`)
     .then((response) => {
       alert('로그아웃 되었습니다.');
@@ -31,7 +31,39 @@ function logout() {
     .catch((error) => {
       console.error('로그아웃 실패: ' + error);
     });
+
+  window.location.reload();
 }
+
+//로그인 시 로그아웃 타이머 기능 구현
+const loginSubmit = document.querySelector('.loginSubmit');
+console.log(loginSubmit);
+
+loginSubmit.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const nickname = document.querySelector('.nicknameText').value;
+  console.log(nickname);
+  const password = document.querySelector('.passwordText').value;
+  console.log(password);
+  const data = {
+    nickname: nickname,
+    password: password,
+  };
+
+  await axios
+    .post('/api/login', data, {
+      headers: {
+        'Content-Type': 'application/json', // 전송할 데이터의 타입 지정
+      },
+    })
+    .then((response) => {
+      alert('로그인 되었습니다.');
+      location.reload();
+    })
+    .catch((error) => {
+      alert(error);
+    });
+});
 
 //로그인 체크
 
@@ -43,18 +75,18 @@ function logincheck() {
   if (checkToken) {
     temp = `
     <button class="logoutBtn" onclick="location.href='write.html'"></i>글쓰기</button>
-            <button class="logoutBtn" onclick="location.href='profiles.html'"></i>내 프로필</button>
+            <button class="logoutBtn goProfile" onclick="location.href='profiles.html'"></i>내 프로필</button>
             <form action="/api/login/logout" method="post">
               <button class="logoutBtn"></i>로그아웃</button>
             </form>
           `;
   } else {
-    temp = `<button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
+    temp = `
+         
+           <button class="signUpBtn" onclick="opensignUpModal()">회원가입</button>
             <button class="loginBtn" onclick="openLoginModal()">로그인</button>
+          
           `;
   }
   topBar.innerHTML += temp;
 }
-
-const mainHome = document.querySelector('.topBar');
-mainHome.addEventListener('click', () => {});

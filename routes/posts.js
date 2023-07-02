@@ -55,8 +55,8 @@ router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
     title,
     content,
   });
-  return res.status(201).json({});
-  // return res.status(201).redirect('/');
+
+  return res.status(201).redirect('/');
 });
 
 // 게시글 수정 API

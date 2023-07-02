@@ -14,8 +14,6 @@ const initMain = async () => {
         <div id="${item.postId}"  class="postBox">
         <img class="post-image" src="${item.postImage}"/>
         <p>${item.title}</p>
-        <p>${item.content}</p>
-        <p>${item.createdAt}</p>
         </div>
       `;
     cardBody.innerHTML += temp;

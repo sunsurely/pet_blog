@@ -29,11 +29,14 @@ router.post('/', async (req, res) => {
 
   // jwt 생성
   const token = jwt.sign({ userId: user.userId }, 'costomized-secret-key', {
-    expiresIn: '1h',
+    expiresIn: '10s',
   }); // 1시간후 토큰 자동 만료
   res.cookie('authorization', `Bearer ${token}`);
-  return res.status(201).json({});
-  // return res.status(201).redirect('/');
+
+  setTimeout(() => {
+    res.clearCookie('authorization');
+    return res.status(201).redirect('/');
+  });
 });
 
 // 로그아웃 API
@@ -46,8 +49,8 @@ router.post('/logout', (req, res) => {
     }
 
     res.clearCookie('authorization');
-    return res.status(201).json({});
-    // return res.redirect('/');
+
+    return res.redirect('/');
   } catch (err) {
     res.status(404).json({ errorMessage: '로그아웃에 실패했습니다.' });
   }

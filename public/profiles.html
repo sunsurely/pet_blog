@@ -14,7 +14,6 @@
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
     <script src="./scripts/profile.js" defer></script>
-    <script src="./scripts/user.js" defer></script>
 
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/profiles.css" />
@@ -22,19 +21,7 @@
   </head>
 
   <body>
-    <div class="topBar">
-      <div class="topIcon">
-        <i
-          class="fi fi-rr-home"
-          id="homeBtn"
-          onclick="location.href='index.html'"
-        ></i>
-      </div>
-      <div class="signBox"></div>
-      <header>
-        <h1 onclick="location.href='index.html'">Pet blog</h1>
-      </header>
-    </div>
+    <div class="topBar"></div>
 
     <div class="mainbox">
       <div class="profileImage">
@@ -44,16 +31,17 @@
             class="myImage"
             alt="..."
           />
-          <h3>닉네임</h3>
+          <h3 class="nickname">닉네임</h3>
           <form method="post" action="" class="setImageBtn">
             <input type="hidden" name="_method" value="put" />
             <input class="modFile" type="file" name="image" />
           </form>
-          <button id="modified">수정완료</button>
+
           <button class="modBtn">수정</button>
+          <div class="myComment">내가 쓴 게시글</div>
         </div>
       </div>
-      <div class="myComment">내가 쓴 게시글</div>
+      <button id="modified">완료</button>
     </div>
   </body>
 </html>

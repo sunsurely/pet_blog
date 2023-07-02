@@ -1,5 +1,6 @@
 .mainbox {
-  margin-top: 50px;
+  width:700px;
+  margin: 200px 40%;
   display: grid;
   grid-template-columns: 1fr 2fr;
   /* grid-template-columns: repeat(auto-fill, minmax(300px, 2fr)); */
@@ -8,6 +9,7 @@
 
 .profileImage {
   min-width: 400px;
+  width:400px;
   height: 450px;
   border-radius: 100px;
 }
@@ -28,11 +30,26 @@
 }
 
 .profileImage h3 {
+  width:100px;
+  display:inline;
+  margin-left:150px;
   margin-top: 3%;
   text-align: center;
   margin-bottom: 3%;
 }
 #modified {
+  margin-left:10%;
+  margin-top:82%;
+  display:inline;
+  cursor: pointer;
+  height:40px;
+  width:40px;
+  font-size:14px;
+  background: #4e4e4e;
+  color:white;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
   display: none;
 }
 
@@ -43,7 +60,41 @@
 }
 
 .inputComment {
+  margin:0px; auto;
   width: 400px;
-  height: 200px;
+  height: 100px;
   padding: 20px;
+  outline: none;
+  border: none;
 }
+
+
+.modBtn{
+  margin-left:10px; 
+  cursor: pointer;
+  display: inline;
+  padding: 7px 10px;
+  background: #e95016;
+  color:white;
+  border: none;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 5px;r;
+}
+
+.modFile{
+  width:250px;
+   margin:10px 0 10px 0;
+}
+
+.myComment{
+  margin:20px auto;
+  padding:10px;
+  width:250px;
+  height:50px;
+  z-index:14; 
+  background:#dadada;
+  border-radius:5px;
+}
+
+

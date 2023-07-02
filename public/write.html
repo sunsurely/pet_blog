@@ -9,24 +9,18 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
-    <script src="./scripts/user.js" defer></script>
+
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/modal.css" />
     <link rel="stylesheet" href="./styles/write.css" />
     <title>Pet blog</title>
   </head>
   <body>
-    <div class="topIcon">
-      <i
-        class="fi fi-rr-home"
-        id="homeBtn"
-        onclick="window.location.href='/'"
-      ></i>
+    <div class="topBar" onclick="location.href='/'">
+      <div class="signBox"></div>
+      <header></header>
     </div>
     <div class="signBox"></div>
-    <header>
-      <h1 onclick="location.href='index.html'">Pet blog</h1>
-    </header>
     <div class="inputBody">
       <form action="/api/posts" method="post" enctype="multipart/form-data">
         <input
@@ -42,8 +36,13 @@
           ,
           cols="100"
         ></textarea>
-        <input type="file" name="image" class="addPostImage" />
-        <button class="postsSubmit" type="submit">글쓰기</button>
+        <input
+          class="fileInclude"
+          type="file"
+          name="image"
+          class="addPostImage"
+        />
+        <button class="postsSubmit" type="submit">등록</button>
       </form>
     </div>
     <!-- 아래는 모달 -->
@@ -56,7 +55,7 @@
       ></i>
       <h3>로그인</h3>
       <div class="modalBox">
-        <form action="/api/login" method="post">
+        <form class="writeForm" action="/api/login" method="post">
           <label for="fname">닉네임</label>
           <input
             type="text"

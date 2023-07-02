@@ -55,14 +55,9 @@
     <!-- 아래는 모달 -->
     <div class="pannal"></div>
     <div class="loginModal">
-      <i
-        class="fi fi-rr-cross-small"
-        onclick="closeModal()"
-        id="modalCloseBtn"
-      ></i>
       <h3>로그인</h3>
       <div class="modalBox">
-        <form action="/api/login" method="post">
+        <form>
           <label for="fname">닉네임</label>
           <input
             type="text"
@@ -79,22 +74,12 @@
             placeholder="Your last name.."
           />
 
-          <input class="loginSubmit" type="submit" value="로그인" />
+          <input class="loginSubmit" type="button" value="로그인" />
+          <div class="closeBtn" onclick="closeModal()">닫기</div>
         </form>
-        <div class="btnSet">
-          <button class="signUpMoveBtn" onclick="opensignUpModal()">
-            회원가입
-          </button>
-          <button class="signUpMoveBtn">닫기</button>
-        </div>
       </div>
     </div>
     <div class="signUpModal">
-      <i
-        class="fi fi-rr-cross-small"
-        onclick="closeModal()"
-        id="modalCloseBtn"
-      ></i>
       <h3>회원가입</h3>
       <div class="modalBox">
         <form action="/api/users" method="post">
@@ -122,13 +107,8 @@
             placeholder="Your last name.."
           />
 
-          <!-- <label for="lname">프로필사진</label>
-              <input type="file"> -->
-
-          <!-- <label for="lname">사진자리 나중에 추가</label>
-              <input type="image" name="password" class="passwordText" placeholder="Your last name.."> -->
-
-          <input class="signUpSubmit" type="submit" value="회원가입" />
+          <input class="signUpSubmit" type="submit" value="등록" />
+          <div class="closeBtn" onclick="closeModal()">닫기</div>
         </form>
       </div>
     </div>

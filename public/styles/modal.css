@@ -55,16 +55,40 @@
   box-sizing: border-box;
 }
 
-.loginSubmit,
-.signUpSubmit {
-  width: 100%;
+.loginSubmit {
+  width: 25%;
   background-color: #4caf50;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 14px 10px;
+  margin: 8px 10px 8px 70px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.signUpSubmit {
+  width: 25%;
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 10px;
+  margin: 8px 10px 8px 70px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.closeBtn {
+  width: 25%;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px 10px;
+  margin: 8px auto;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  text-align: center;
 }
 
 .loginSubmit:hover,
@@ -73,18 +97,14 @@
 }
 
 .signUpMoveBtn {
-  float: right;
   width: 35%;
   background-color: #4caf50;
   color: white;
-  padding: 14px 20px;
+  padding: 14px 10px;
   margin: 8px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-.btnSet {
-  margin-right: 50px;
 }
 
 .signUpSubmit:hover {
