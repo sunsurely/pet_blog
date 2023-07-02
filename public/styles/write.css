@@ -3,21 +3,6 @@
   width: 100%;
   display: block;
 }
-.postTitle {
-  width: 50%;
-  padding-left: 10px;
-  margin: 100px auto 20px 400px;
-  min-width: 800px;
-  height: 30px;
-}
-
-.postTextArea {
-  width: 50%;
-  min-width: 800px;
-  margin: 20px 400px;
-  padding: 20px;
-  resize: none;
-}
 
 .postsSubmit {
   margin: 2px 550px auto auto;
@@ -33,11 +18,6 @@
   float: right;
 }
 
-.addPostImage {
-  float: left;
-  margin-left: 10%;
-}
-
 .fileInclude {
   margin-left: 400px;
   margin-bottom: 50px;
@@ -50,4 +30,64 @@
 .goWrite {
   position: absolute;
   top: 10%;
+}
+
+.postTitle {
+  margin-top: 10px;
+  margin-left: 2.5%;
+  background-color: rgb(233, 233, 240);
+  width: 90%;
+  height: 82%;
+  min-height: 30px;
+  border-radius: 15px;
+  padding: 5px;
+  resize: none;
+}
+
+.postTextArea {
+  margin-top: 20px;
+  width: 90%;
+  background-color: rgb(233, 233, 240);
+  height: 82%;
+  min-height: 460px;
+  border-radius: 15px;
+  padding: 25px;
+  resize: none;
+}
+
+.updateBtn {
+  margin-top: 5px;
+  cursor: pointer;
+  display: inline;
+  padding: 7px 10px;
+  background: #e95016;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.postTitle {
+  margin: 100px auto 0 400px;
+  background-color: rgb(233, 233, 240);
+  width: 50%;
+  height: 82%;
+  min-height: 30px;
+  border-radius: 15px;
+  padding: 5px;
+  resize: none;
+}
+
+.postTextArea {
+  margin-left: 400px;
+  margin-top: 20px;
+  width: 50%;
+
+  background-color: rgb(233, 233, 240);
+  height: 82%;
+  min-height: 460px;
+  border-radius: 15px;
+  padding: 25px;
+  resize: none;
 }

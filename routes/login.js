@@ -32,7 +32,13 @@ router.post('/', async (req, res) => {
     expiresIn: '1h',
   }); // 1시간후 토큰 자동 만료
   res.cookie('authorization', `Bearer ${token}`);
-  return res.status(201).redirect('/');
+
+  // setTimeout(() => {
+  //   res.clearCookie('authorization');
+  //   return res.status(201).redirect('/');
+  // }, 1000);
+
+  return res.status(201).json({});
 });
 
 // 로그아웃 API

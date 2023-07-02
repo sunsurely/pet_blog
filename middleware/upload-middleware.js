@@ -34,15 +34,15 @@ const path = require('path');
 const s3Client = new S3Client({
   region: 'ap-northeast-2',
   credentials: {
-    accessKeyId: 'AKIA3YXBFXUATBCFRLVB',
-    secretAccessKey: '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',
+    accessKeyId: '',
+    secretAccessKey: '',
   },
 });
 
 const upload = multer({
   storage: multerS3({
     s3: s3Client,
-    bucket: 'petblog',
+    bucket: 'pet-blog',
     acl: 'public-read',
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {

@@ -222,18 +222,38 @@ body {
   border-radius: 5px;
 }
 
-.writeBtn {
-  position: absolute;
-  top: 30%;
-  left: 45%;
+.postTitle {
+  margin-top: 10px;
+  margin-left: 2.5%;
+  background-color: rgb(233, 233, 240);
+  width: 90%;
+  height: 82%;
+  min-height: 30px;
+  border-radius: 15px;
+  padding: 5px;
+  resize: none;
 }
-.goProfile {
-  position: absolute;
-  top: 30%;
-  left: 49%;
+
+.postTextArea {
+  margin-top: 20px;
+  width: 90%;
+  background-color: rgb(233, 233, 240);
+  height: 82%;
+  min-height: 460px;
+  border-radius: 15px;
+  padding: 25px;
+  resize: none;
 }
-.btnLogout {
-  position: absolute;
-  top: 30%;
-  left: 53%;
+
+.updateBtn {
+  margin-top: 5px;
+  cursor: pointer;
+  display: inline;
+  padding: 7px 10px;
+  background: #e95016;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 5px;
 }

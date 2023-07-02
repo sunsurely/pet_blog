@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
-  logincheck();
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//   logincheck();
+// });
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -12,31 +12,41 @@ const getDetail = async (id) => {
   const mainBox = document.querySelector('.mainBox');
   mainBox.innerHTML = '';
   const temp = `
-       <div class="postDetailBox">
-           <h2>${post.title}</h2>
-           <img src="${post.postImage}"/>
-           <div class="content">
-          <p>${post.content}</p>
-          </div>
-          <div class="comment">
-          <img src='../images/reply.png'>
-           </div>
-        <div class="love">
-            <i class="fi fi-rr-heart" id="emptyHeartIcon"></i>
-            <!-- 색깔하트출력안되는중..원인불명 -->
-            <!-- <i class="fi fi-sr-heart"></i> -->
-            <p>좋아요</p>
-        </div>
-        <div class="comment" onclick="commentOnOff()">
-            <i class="fi fi-rr-comment-alt" id="commentIcon"></i>
-            <p>댓글</p>
-         </div>
-        <button onclick="getDelete(${id})">삭제버튼</button>
-        <button onclick="updatePost(${id})">수정버튼</button>
-       </div>`;
+  <div class="postDetailBox">
+  <h2>${post.title}</h2>
+  <img src="${post.postImage}"/>
+  <div class="content">
+  <p>${post.content}</p>
+  </div>
+  <div class="comment">
+  
+  </div>
+  <div class="love">
+  <i class="fi fi-rr-heart" id="emptyHeartIcon"></i>
+  <img class='likeButton' onclick='likeChange(this.src)' src='../images/heart.png'>
+  </div>
+  <div class="comment" onclick="commentOnOff()">
+  <i class="fi fi-rr-comment-alt" id="commentIcon"></i>
+  <img src='../images/reply.png'>
+  </div>
+  <button class='deleteBtn' onclick="getDelete(${id})">삭제</button>
+  <button class='deleteBtn' onclick="updatePost(${id})">수정</button>
+  </div>`;
   mainBox.innerHTML = temp;
 };
 
+function likeChange(src) {
+  const like = document.querySelector('.likeButton');
+  const urls = [
+    'http://localhost:3000/images/heart.png',
+    'http://localhost:3000/images/heart2.png',
+  ];
+  if (src === urls[0]) {
+    like.src = urls[1];
+  } else {
+    like.src = urls[0];
+  }
+}
 const getComment = async (id) => {
   const { data } = await axios.get(`/api/comments/posts/${id}/comments`);
   const comments = data.data;
@@ -58,7 +68,6 @@ const getComment = async (id) => {
 
 const commentOnOff = () => {
   const commentBox = document.querySelector('.commentBox');
-  console.log(commentBox.style.display);
   if (commentBox.style.display == 'block') {
     commentBox.style.display = 'none';
   } else {
@@ -125,13 +134,15 @@ async function updatePost(id) {
   const mainBox = document.querySelector('.mainBox');
   mainBox.innerHTML = '';
   const temp = `
+      <div class="postDetailBox">
         <form method="post" action="">
           <input type="hidden" name="_method" value="put">
           <input type="text" name="title" class="postTitle" placeholder="제목을 입력해주세요.">
-          <textarea class="postTextArea" name="content" rows="45", cols="100"></textarea>
+          <textarea class="postTextArea" name="content" rows="35", cols="70"></textarea>
           <input type="file" name="image" class="addPostImage">
         </form>
-        <button class="updateBtn">수정하기</button>`;
+        <button class="updateBtn">수정하기</button>
+      </div>`;
   mainBox.innerHTML = temp;
   const updateBtn = document.querySelector('.updateBtn');
   updateBtn.addEventListener('click', async () => {

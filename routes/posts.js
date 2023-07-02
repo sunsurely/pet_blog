@@ -41,20 +41,32 @@ router.get('/:postId', async (req, res) => {
 
 //게시글 등록
 router.post('/', loginMiddleware, upload.single('image'), async (req, res) => {
-  const imageUrl = req.file.location;
-  console.log(imageUrl);
+  const file = req.file;
+
   const { userId } = res.locals.user;
   const { title, content } = req.body;
   const user = await Users.findOne({
     where: { userId },
   });
-  const post = await Posts.create({
-    postImage: imageUrl, // 데이타베이스 postImage 항목 추가로  이름 변경
-    UserId: userId,
-    nickname: user.nickname,
-    title,
-    content,
-  });
+
+  if (file) {
+    const imageUrl = req.file.location;
+    await Posts.create({
+      postImage: imageUrl, // 데이타베이스 postImage 항목 추가로  이름 변경
+      UserId: userId,
+      nickname: user.nickname,
+      title,
+      content,
+    });
+  } else {
+    await Posts.create({
+      postImage: '../images/baseImage.PNG',
+      UserId: userId,
+      nickname: user.nickname,
+      title,
+      content,
+    });
+  }
 
   return res.status(201).redirect('/');
 });
@@ -65,7 +77,7 @@ router.patch(
   loginMiddleware,
   upload.single('image'),
   async (req, res) => {
-    const File = req.file;
+    const file = req.file;
 
     const { userId } = res.locals.user;
     const { postId } = req.params;
@@ -81,7 +93,7 @@ router.patch(
         .json({ errorMessage: '게시물을 수정할 수 없습니다.' });
     }
 
-    if (yesFile) {
+    if (file) {
       const imageUrl = req.file.location;
       await Posts.update(
         { postImage: imageUrl, title, content },
@@ -101,6 +113,7 @@ router.patch(
         },
       );
     }
+
     res.status(201).json({ message: '게시물을 수정했습니다.' });
   },
 );
