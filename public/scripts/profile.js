@@ -18,26 +18,24 @@ modBtn.addEventListener('click', () => {
 modified.addEventListener('click', async () => {
   const file = document.querySelector('.modFile').files[0];
   const userComment = document.querySelector('.inputComment').value;
-  console.log(userComment);
   const password = prompt('비밀번호를 입력하세요');
-  console.log(file);
   const formData = new FormData();
   if (file) {
     formData.append('image', file);
   }
   formData.append('password', password);
   formData.append('userComment', userComment);
-  console.log(userComment);
 
   await axios
     .patch('/api/users/profile', formData)
     .then((response) => {
       alert('파일 업로드 성공');
+      location.reload();
     })
     .catch((error) => {
-      alert(error);
+      alert(error.response.data.errorMessage);
+      location.reload();
     });
-  location.reload();
 });
 
 const profileImage = async () => {

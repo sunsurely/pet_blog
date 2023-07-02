@@ -257,3 +257,7 @@ body {
   font-size: 15px;
   border-radius: 5px;
 }
+
+#commentUpdateContent {
+  resize: none;
+}

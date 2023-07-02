@@ -36,8 +36,6 @@ router.post('/posts/:postId/comments', loginMiddleware, async (req, res) => {
   const { userId } = res.locals.user;
   const { postId } = req.params;
   const { comment } = req.body;
-  console.log('comment: ' + comment);
-  console.log('길이: ' + comment.length);
   if (comment.length === 0) {
     return res.status(403).json({
       message: '댓글 내용을 입력해주세요.',
