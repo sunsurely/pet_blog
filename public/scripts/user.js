@@ -22,20 +22,21 @@ function opensignUpModal() {
   pannal.show();
   signUpModal.show();
 }
-async function logout() {
-  await axios
+
+const logout = () => {
+  axios
     .post(`/api/login/logout`)
     .then((response) => {
+      window.localStorage.setItem('isLoggedIn', false);
       alert('로그아웃 되었습니다.');
+      location.reload();
     })
     .catch((error) => {
       console.error('로그아웃 실패: ' + error);
     });
+  window.localStorage.setItem('isLoggedIn', false);
+};
 
-  window.location.reload();
-}
-
-//로그인 시 로그아웃 타이머 기능 구현
 const loginSubmit = document.querySelector('.loginSubmit');
 console.log(loginSubmit);
 
@@ -57,6 +58,7 @@ loginSubmit.addEventListener('click', async (e) => {
       },
     })
     .then((response) => {
+      localStorage.setItem('isLoggedIn', true);
       alert('로그인 되었습니다.');
       location.reload();
     })

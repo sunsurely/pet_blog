@@ -8,7 +8,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
     <script src="./scripts/detail.js" defer></script>
     <link rel="stylesheet" href="./styles/detail.css" />
-
     <link rel="stylesheet" href="./styles/modal.css" />
     <title>게시글 상세조회</title>
   </head>
@@ -36,6 +35,33 @@
     <div class="showCommentBox">
       <div class="commentlist">
         <p>내용입니다.</p>
+      </div>
+    </div>
+
+    <div class="pannal"></div>
+    <div class="loginModal">
+      <h3>로그인</h3>
+      <div class="modalBox">
+        <form>
+          <label for="fname">닉네임</label>
+          <input
+            type="text"
+            name="nickname"
+            class="nicknameText"
+            placeholder="Your name.."
+          />
+
+          <label for="name">비밀번호</label>
+          <input
+            type="password"
+            name="password"
+            class="passwordText"
+            placeholder="Your last name.."
+          />
+
+          <input class="loginSubmit" type="button" value="로그인" />
+          <div class="closeBtn" onclick="closeModal()">닫기</div>
+        </form>
       </div>
     </div>
   </body>

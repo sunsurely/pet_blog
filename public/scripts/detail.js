@@ -22,11 +22,9 @@ const getDetail = async (id) => {
   
   </div>
   <div class="love">
-  <i class="fi fi-rr-heart" id="emptyHeartIcon"></i>
   <img class='likeButton' onclick='likeChange(this.src)' src='../images/heart.png'>
   </div>
   <div class="comment" onclick="commentOnOff()">
-  <i class="fi fi-rr-comment-alt" id="commentIcon"></i>
   <img src='../images/reply.png'>
   </div>
   <button class='deleteBtn' onclick="getDelete(${id})">삭제</button>
@@ -131,39 +129,47 @@ const deleteComment = async (commentid) => {
 };
 
 async function updatePost(id) {
-  const mainBox = document.querySelector('.mainBox');
-  mainBox.innerHTML = '';
-  const temp = `
-      <div class="postDetailBox">
-        <form method="post" action="">
-          <input type="hidden" name="_method" value="put">
-          <input type="text" name="title" class="postTitle" placeholder="제목을 입력해주세요.">
-          <textarea class="postTextArea" name="content" rows="35", cols="70"></textarea>
-          <input type="file" name="image" class="addPostImage">
-        </form>
-        <button class="updateBtn">수정하기</button>
-      </div>`;
-  mainBox.innerHTML = temp;
-  const updateBtn = document.querySelector('.updateBtn');
-  updateBtn.addEventListener('click', async () => {
-    const title = document.querySelector('.postTitle').value;
-    const content = document.querySelector('.postTextArea').value;
-    const file = document.querySelector('.addPostImage').files[0];
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('title', title);
-    formData.append('content', content);
+  const loginCheck = localStorage.getItem('isLoggedIn');
+  const checkToken = document.cookie.split('=')[1];
 
-    await axios
-      .patch(`/api/posts/${id}`, formData)
-      .then((response) => {
-        console.log('업로드 성공');
-      })
-      .catch((error) => {
-        console.error('업로드 실패: ' + error);
-      });
-    window.location.reload();
-  });
+  console.log(loginCheck);
+  if (!checkToken) {
+    openLoginModal();
+  } else {
+    const mainBox = document.querySelector('.mainBox');
+    mainBox.innerHTML = '';
+    const temp = `
+        <div class="postDetailBox">
+          <form method="post" action="">
+            <input type="hidden" name="_method" value="put">
+            <input type="text" name="title" class="postTitle" placeholder="제목을 입력해주세요.">
+            <textarea class="postTextArea" name="content" rows="35", cols="70"></textarea>
+            <input type="file" name="image" class="addPostImage">
+          </form>
+          <button class="updateBtn">수정하기</button>
+        </div>`;
+    mainBox.innerHTML = temp;
+    const updateBtn = document.querySelector('.updateBtn');
+    updateBtn.addEventListener('click', async () => {
+      const title = document.querySelector('.postTitle').value;
+      const content = document.querySelector('.postTextArea').value;
+      const file = document.querySelector('.addPostImage').files[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('title', title);
+      formData.append('content', content);
+
+      await axios
+        .patch(`/api/posts/${id}`, formData)
+        .then((response) => {
+          console.log('업로드 성공');
+        })
+        .catch((error) => {
+          console.error('업로드 실패: ' + error);
+        });
+      window.location.reload();
+    });
+  }
 }
 
 async function getDelete() {
@@ -192,5 +198,50 @@ async function postComment() {
   window.location.reload();
 }
 
+function openLoginModal() {
+  const loginModal = $('.loginModal');
+  const pannal = $('.pannal');
+  pannal.show();
+  loginModal.show();
+}
 getDetail(id);
 getComment(id);
+
+function closeModal() {
+  let loginModal = $('.loginModal');
+  let signUpModal = $('.signUpModal');
+  let pannal = $('.pannal');
+  pannal.hide();
+  loginModal.hide();
+  signUpModal.hide();
+}
+
+const loginSubmit = document.querySelector('.loginSubmit');
+console.log(loginSubmit);
+
+loginSubmit.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const nickname = document.querySelector('.nicknameText').value;
+  console.log(nickname);
+  const password = document.querySelector('.passwordText').value;
+  console.log(password);
+  const data = {
+    nickname: nickname,
+    password: password,
+  };
+
+  await axios
+    .post('/api/login', data, {
+      headers: {
+        'Content-Type': 'application/json', // 전송할 데이터의 타입 지정
+      },
+    })
+    .then((response) => {
+      localStorage.setItem('isLoggedIn', true);
+      alert('로그인 되었습니다.');
+      location.reload();
+    })
+    .catch((error) => {
+      alert(error);
+    });
+});
