@@ -38,7 +38,7 @@ router.post('/posts/:postId/comments', loginMiddleware, async (req, res) => {
   const { comment } = req.body;
   if (comment.length === 0) {
     return res.status(403).json({
-      message: '댓글 내용을 입력해주세요.',
+      errorMessage: '댓글 내용을 입력해주세요.',
     });
   }
 
@@ -65,7 +65,7 @@ router.post(
 
     if (CommentId.UserId !== userId) {
       return res.status(404).json({
-        message: '수정 권한이 없습니다.',
+        errorMessage: '수정 권한이 없습니다.',
       });
     }
 
@@ -90,12 +90,12 @@ router.put(
 
     if (CommentId.UserId !== userId) {
       return res.status(404).json({
-        message: '사용자가 일치하지 않습니다.',
+        errorMessage: '사용자가 일치하지 않습니다.',
       });
     }
     if (comment.length === 0) {
       return res.status(403).json({
-        message: '댓글 내용을 입력해주세요.',
+        errorMessage: '댓글 내용을 입력해주세요.',
       });
     }
 
@@ -127,11 +127,11 @@ router.delete(
 
     if (!CommentId) {
       return res.status(404).json({
-        message: '댓글이 존재하지 않습니다.',
+        errorMessage: '댓글이 존재하지 않습니다.',
       });
     } else if (CommentId.UserId !== userId) {
       return res.status(403).json({
-        message: '댓글 삭제 권한이 있는 사용자가 아닙니다.',
+        errorMessage: '댓글 삭제 권한이 있는 사용자가 아닙니다.',
       });
     }
 

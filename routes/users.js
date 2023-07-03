@@ -63,8 +63,7 @@ router.post('/', async (req, res) => {
     Nickname: user.nickname,
   });
 
-  // return res.status(201).redirect('/');
-  return res.status(201).json({});
+  return res.status(201).redirect('/');
 });
 
 //프로필 조회
@@ -99,7 +98,7 @@ router.patch(
       if (isPasswordMatch !== true) {
         return res
           .status(400)
-          .json({ errMessage: '비밀번호가 일치하지 않습니다.' });
+          .json({ errorMessage: '비밀번호가 일치하지 않습니다.' });
       }
       if (file && userComment) {
         //프로필 페이지에서  이미지 , 커멘트 모두 보내는 경우
