@@ -63,8 +63,7 @@ router.post('/', async (req, res) => {
     Nickname: user.nickname,
   });
 
-  // return res.status(201).redirect('/');
-  return res.status(201).json({});
+  return res.status(201).redirect('/');
 });
 
 //프로필 조회
